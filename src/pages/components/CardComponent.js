@@ -18,6 +18,7 @@ const CardComponent = ({ vet, image, setSeePopup, setSelectedVet }) => {
         >
             <Stack align="center">
                 <Image
+                    data-testid={'image-card-test'}
                     className="imgS"
                     borderRadius="10px"
                     boxSize="150px"

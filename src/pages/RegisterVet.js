@@ -15,17 +15,10 @@ import {
 } from '@chakra-ui/react'
 import '../styles/form.css'
 
-
 import HeaderComponent from './components/HeaderComponent'
 
 // Librerias para usar el Mapa
 import { MapContainer, TileLayer, useMapEvents, Marker } from 'react-leaflet'
-// import CurrentLocation from './components/CurrentLocation'
-// import {  MapContainer, TileLayer, useMapEvents, Marker, Popup } from 'react-leaflet'
-// import { useEffect } from 'react'
-// import L from 'leaflet'
-
-
 
 const RegisterVet = () => {
     const [nombre, setNombre] = useState('')
@@ -54,14 +47,11 @@ const RegisterVet = () => {
     }
 
     const handleAddVet = (event) => {
-
         event.preventDefault()
 
-        if (isNaN(telefono) && isNaN(zona))
-        {
+        if (isNaN(telefono) && isNaN(zona)) {
             alert('Debe ingresar solo numeros en telefono y zona.')
-        }else{
-
+        } else {
             const services = []
             for (const [key, value] of Object.entries(dicServices)) {
                 console.log(key + ' -+- ' + value)
@@ -77,6 +67,7 @@ const RegisterVet = () => {
 
             if (position === null) {
                 alert('No has seleccionado una posicion/ubicacion en el mapa')
+                return
             }
 
             fetch('http://localhost:5000/api/vets', {
@@ -111,12 +102,7 @@ const RegisterVet = () => {
                 .then(() => {
                     window.location.href = '/'
                 })
-            
         }
-
-        
-
-        
     }
 
     const getNombre = (name) => {
@@ -155,10 +141,13 @@ const RegisterVet = () => {
                         <div className="infoContainer">
                             <div className="titleContainer">
                                 <Heading className="title">
-                                Formulario para registrar una veterinaria
+                                    Formulario para registrar una veterinaria
                                 </Heading>
                             </div>
-                            <form onSubmit={handleAddVet}>
+                            <form
+                                onSubmit={handleAddVet}
+                                data-testid={'handle-add-vet-test'}
+                            >
                                 <InputComponent
                                     getter={getNombre}
                                     title="Nombre"
@@ -187,23 +176,27 @@ const RegisterVet = () => {
                                     title="Correo"
                                     message="Ingresa tu correo"
                                 />
-                            
+
                                 <FormLabel>Servicios ofrecidos</FormLabel>
                                 <CheckboxGroup
                                     colorScheme="orange"
                                     defaultValue={['none']}
                                 >
-                                    <Stack spacing={[2, 3]} direction={['column']}>
+                                    <Stack
+                                        spacing={[2, 3]}
+                                        direction={['column']}
+                                    >
                                         <Checkbox
                                             value="Vacunacion"
                                             onChange={(e) =>
                                                 setDicServices((prevTest) => ({
                                                     ...prevTest,
-                                                    vacunacion: e.target.checked,
+                                                    vacunacion:
+                                                        e.target.checked,
                                                 }))
                                             }
                                         >
-                                        Vacunacion
+                                            Vacunacion
                                         </Checkbox>
                                         <Checkbox
                                             value="Rayos X"
@@ -214,7 +207,7 @@ const RegisterVet = () => {
                                                 }))
                                             }
                                         >
-                                        Rayos X
+                                            Rayos X
                                         </Checkbox>
                                         <Checkbox
                                             value="Examenes corporales"
@@ -222,22 +215,23 @@ const RegisterVet = () => {
                                                 setDicServices((prevTest) => ({
                                                     ...prevTest,
                                                     examenes_corporales:
-                                                    e.target.checked,
+                                                        e.target.checked,
                                                 }))
                                             }
                                         >
-                                        Examenes corporales
+                                            Examenes corporales
                                         </Checkbox>
                                         <Checkbox
                                             value="Hematologías"
                                             onChange={(e) =>
                                                 setDicServices((prevTest) => ({
                                                     ...prevTest,
-                                                    hematologias: e.target.checked,
+                                                    hematologias:
+                                                        e.target.checked,
                                                 }))
                                             }
                                         >
-                                        Hematologías
+                                            Hematologías
                                         </Checkbox>
                                         <Checkbox
                                             value="Hospedaje"
@@ -248,7 +242,7 @@ const RegisterVet = () => {
                                                 }))
                                             }
                                         >
-                                        Hospedaje
+                                            Hospedaje
                                         </Checkbox>
                                         <Checkbox
                                             value="Grooming"
@@ -259,7 +253,7 @@ const RegisterVet = () => {
                                                 }))
                                             }
                                         >
-                                        Grooming
+                                            Grooming
                                         </Checkbox>
                                         <Checkbox
                                             value="Desparacitacion"
@@ -267,22 +261,23 @@ const RegisterVet = () => {
                                                 setDicServices((prevTest) => ({
                                                     ...prevTest,
                                                     desparacitacion:
-                                                    e.target.checked,
+                                                        e.target.checked,
                                                 }))
                                             }
                                         >
-                                        Desparacitacion
+                                            Desparacitacion
                                         </Checkbox>
                                         <Checkbox
                                             value="Castraciones"
                                             onChange={(e) =>
                                                 setDicServices((prevTest) => ({
                                                     ...prevTest,
-                                                    castraciones: e.target.checked,
+                                                    castraciones:
+                                                        e.target.checked,
                                                 }))
                                             }
                                         >
-                                        Castraciones
+                                            Castraciones
                                         </Checkbox>
                                         <Checkbox
                                             value="Operacion"
@@ -293,19 +288,18 @@ const RegisterVet = () => {
                                                 }))
                                             }
                                         >
-                                        Operacion
+                                            Operacion
                                         </Checkbox>
                                     </Stack>
                                 </CheckboxGroup>
-                            
 
                                 <br></br>
                                 <h1>
-                                Ingresa la ubicacion donde se encuentra la
-                                veterinaria
+                                    Ingresa la ubicacion donde se encuentra la
+                                    veterinaria
                                 </h1>
                                 <br></br>
-                                                   
+
                                 <MapContainer
                                     center={[14.6050635, -90.4893286]}
                                     zoom={13}
@@ -316,10 +310,11 @@ const RegisterVet = () => {
                                     />
                                     <LocateMarker />
                                 </MapContainer>
-                            
+
                                 {position !== null && (
                                     <p>
-                                    Lat: {position.lat}, Long: {position.lng}{' '}
+                                        Lat: {position.lat}, Long:{' '}
+                                        {position.lng}{' '}
                                     </p>
                                 )}
 
@@ -328,7 +323,7 @@ const RegisterVet = () => {
                                     title="Teléfono"
                                     message="12345678"
                                 />
-                                <FormControl isRequired> 
+                                <FormControl isRequired>
                                     <FormLabel>Emergencia</FormLabel>
                                     <RadioGroup
                                         onChange={setEmergencia}
@@ -343,17 +338,27 @@ const RegisterVet = () => {
 
                                 <FormControl isRequired>
                                     <FormLabel>Tipo de veterinaria</FormLabel>
-                                    <Select focusBorderColor={'rgb(174 213 142)'}>
-                                        <option value="Nada">{'Cualquiera'}</option>
-                                        <option value="Normal">{'Normal'}</option>
-                                        <option value="Petshop">{'Petshop'}</option>
-                                        <option value="Clinica">{'Clinica'}</option>
+                                    <Select
+                                        focusBorderColor={'rgb(174 213 142)'}
+                                    >
+                                        <option value="Nada">
+                                            {'Cualquiera'}
+                                        </option>
+                                        <option value="Normal">
+                                            {'Normal'}
+                                        </option>
+                                        <option value="Petshop">
+                                            {'Petshop'}
+                                        </option>
+                                        <option value="Clinica">
+                                            {'Clinica'}
+                                        </option>
                                         <option value="Hospital">
                                             {'Hospital'}
                                         </option>
                                     </Select>
                                 </FormControl>
-                                <FormControl isRequired> 
+                                <FormControl isRequired>
                                     <FormLabel>Hora de apertura</FormLabel>
                                     <Input
                                         onChange={handleChange2}
@@ -363,7 +368,7 @@ const RegisterVet = () => {
                                         focusBorderColor={'rgb(174 213 142)'}
                                     />
                                 </FormControl>
-                                <FormControl isRequired> 
+                                <FormControl isRequired>
                                     <FormLabel>Hora de cierre</FormLabel>
                                     <Input
                                         onChange={handleChange}
@@ -385,7 +390,7 @@ const RegisterVet = () => {
                                     width="100%"
                                     marginTop="10px"
                                 >
-                                Enviar formulario
+                                    Enviar formulario
                                 </Button>
                             </form>
 
@@ -402,7 +407,6 @@ const RegisterVet = () => {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

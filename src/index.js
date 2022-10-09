@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.render(
     <ChakraProvider>
-        <BrowserRouter>
+        <BrowserRouter data-testid={'index-test'}>
             <App />
         </BrowserRouter>
     </ChakraProvider>,
