@@ -69,69 +69,71 @@ const Register = () => {
     }
 
     return (
-        <div className="provisionalBackgorund">
-            <div className="faqCont container">
-                <div className="infoContainer">
-                    <div className="titleContainer">
-                        <Heading className="title">Registro</Heading>
+        <div data-testid={'register-page-test'}>
+            <div className="provisionalBackgorund">
+                <div className="faqCont container">
+                    <div className="infoContainer">
+                        <div className="titleContainer">
+                            <Heading className="title">Registro</Heading>
+                        </div>
+                        <form onSubmit={handleSubmit}>
+                            <InputComponent
+                                // getter={getNombre}
+                                title="Nombre"
+                                message="Ingresa tu nombre"
+                            />
+                            <InputComponent
+                                // getter={getApellido}
+                                title="Apellidos"
+                                message="Ingresa tus apellidos"
+                            />
+                            <InputComponent
+                                getter={getUser}
+                                title="Nombre de usuario"
+                                message="Ingresa tu nombre de usuario"
+                            />
+                            <InputComponent
+                                getter={getCorreo}
+                                title="Correo"
+                                message="Ingresa tu correo"
+                            />
+                            <InputComponent
+                                getter={getContra}
+                                title="Contraseña"
+                                message="Ingresa tu contraseña"
+                            />
+                            <InputComponent
+                                getter={getContras}
+                                title="Cofirmar contraseña"
+                                message="Confirma tu contraseña"
+                            />
+                            <Button
+                                backgroundColor="#ea9a64"
+                                _hover="rgb(174 213 142)"
+                                _active={{
+                                    bg: 'rgb(174 213 142)',
+                                    borderColor: 'rgb(174, 213, 142)',
+                                }}
+                                color="#fff"
+                                type="submit"
+                                width="100%"
+                                marginTop="10px"
+                            >
+                                Aceptar
+                            </Button>
+                        </form>
+
+                        <p className="questionCont">
+                            ¿Ya tienes cuenta?{' '}
+                            <a href="./Login">
+                                {' '}
+                                <b className="highlight">Iniciar sesión</b>
+                            </a>
+                        </p>
                     </div>
-                    <form onSubmit={handleSubmit}>
-                        <InputComponent
-                            // getter={getNombre}
-                            title="Nombre"
-                            message="Ingresa tu nombre"
-                        />
-                        <InputComponent
-                            // getter={getApellido}
-                            title="Apellidos"
-                            message="Ingresa tus apellidos"
-                        />
-                        <InputComponent
-                            getter={getUser}
-                            title="Nombre de usuario"
-                            message="Ingresa tu nombre de usuario"
-                        />
-                        <InputComponent
-                            getter={getCorreo}
-                            title="Correo"
-                            message="Ingresa tu correo"
-                        />
-                        <InputComponent
-                            getter={getContra}
-                            title="Contraseña"
-                            message="Ingresa tu contraseña"
-                        />
-                        <InputComponent
-                            getter={getContras}
-                            title="Cofirmar contraseña"
-                            message="Confirma tu contraseña"
-                        />
-                        <Button
-                            backgroundColor="#ea9a64"
-                            _hover="rgb(174 213 142)"
-                            _active={{
-                                bg: 'rgb(174 213 142)',
-                                borderColor: 'rgb(174, 213, 142)',
-                            }}
-                            color="#fff"
-                            type="submit"
-                            width="100%"
-                            marginTop="10px"
-                        >
-                            Aceptar
-                        </Button>
-                    </form>
 
-                    <p className="questionCont">
-                        ¿Ya tienes cuenta?{' '}
-                        <a href="./Login">
-                            {' '}
-                            <b className="highlight">Iniciar sesión</b>
-                        </a>
-                    </p>
+                    <div className="innerContainer"></div>
                 </div>
-
-                <div className="innerContainer"></div>
             </div>
         </div>
     )
