@@ -13,7 +13,6 @@ import MapVet from './pages/MapVet'
 
 const App = () => {
     return (
-
         <Routes data-testid={'app-test'}>
             <Route
                 path="/"
@@ -56,7 +55,7 @@ const App = () => {
                 element={
                     <>
                         {' '}
-                        <Register />{' '}
+                        <HeaderComponent /> <Register />{' '}
                     </>
                 }
             ></Route>
@@ -74,7 +73,7 @@ const App = () => {
                 element={
                     <>
                         {' '}
-                        <RegisterVet />{' '}
+                        <HeaderComponent /> <RegisterVet />{' '}
                     </>
                 }
             ></Route>

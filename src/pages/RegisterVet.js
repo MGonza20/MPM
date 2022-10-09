@@ -15,8 +15,6 @@ import {
 } from '@chakra-ui/react'
 import '../styles/form.css'
 
-import HeaderComponent from './components/HeaderComponent'
-
 // Librerias para usar el Mapa
 import { MapContainer, TileLayer, useMapEvents, Marker } from 'react-leaflet'
 
@@ -51,6 +49,7 @@ const RegisterVet = () => {
 
         if (isNaN(telefono) && isNaN(zona)) {
             alert('Debe ingresar solo numeros en telefono y zona.')
+            return
         } else {
             const services = []
             for (const [key, value] of Object.entries(dicServices)) {
@@ -135,7 +134,6 @@ const RegisterVet = () => {
     return (
         <div data-testid={'register-vet'}>
             <div>
-                <HeaderComponent className="header" />
                 <div className="provisionalBackgorund">
                     <div className="faqCont container">
                         <div className="infoContainer">
@@ -149,29 +147,34 @@ const RegisterVet = () => {
                                 data-testid={'handle-add-vet-test'}
                             >
                                 <InputComponent
+                                    data-testid={'get-nombre-test'}
                                     getter={getNombre}
                                     title="Nombre"
                                     message="Ingresa el nombre del veterinario"
                                 />
                                 <InputComponent
+                                    data-testid={'get-ciudad-test'}
                                     getter={getCiudad}
                                     title="Ciudad"
                                     message="Ingresa la ciudad de tu veterinaria"
                                 />
 
                                 <InputComponent
+                                    data-testid={'get-zona-test'}
                                     getter={getZona}
                                     title="Zona"
                                     message="Ingresa la zona de tu veterinaria"
                                 />
 
                                 <InputComponent
+                                    data-testid={'get-direccion-test'}
                                     getter={getDireccion}
                                     title="Dirección"
                                     message="Ingresa la dirección de tu veterinaria"
                                 />
 
                                 <InputComponent
+                                    data-testid={'get-correo-test'}
                                     getter={getCorreo}
                                     title="Correo"
                                     message="Ingresa tu correo"
@@ -187,6 +190,7 @@ const RegisterVet = () => {
                                         direction={['column']}
                                     >
                                         <Checkbox
+                                            data-testid={'vacunacion-test'}
                                             value="Vacunacion"
                                             onChange={(e) =>
                                                 setDicServices((prevTest) => ({
@@ -199,6 +203,7 @@ const RegisterVet = () => {
                                             Vacunacion
                                         </Checkbox>
                                         <Checkbox
+                                            data-testid={'rayos-x-test'}
                                             value="Rayos X"
                                             onChange={(e) =>
                                                 setDicServices((prevTest) => ({
@@ -210,6 +215,9 @@ const RegisterVet = () => {
                                             Rayos X
                                         </Checkbox>
                                         <Checkbox
+                                            data-testid={
+                                                'examenes-corporales-test'
+                                            }
                                             value="Examenes corporales"
                                             onChange={(e) =>
                                                 setDicServices((prevTest) => ({
@@ -222,6 +230,7 @@ const RegisterVet = () => {
                                             Examenes corporales
                                         </Checkbox>
                                         <Checkbox
+                                            data-testid={'hematologias-test'}
                                             value="Hematologías"
                                             onChange={(e) =>
                                                 setDicServices((prevTest) => ({
@@ -234,6 +243,7 @@ const RegisterVet = () => {
                                             Hematologías
                                         </Checkbox>
                                         <Checkbox
+                                            data-testid={'hospedaje-test'}
                                             value="Hospedaje"
                                             onChange={(e) =>
                                                 setDicServices((prevTest) => ({
@@ -245,6 +255,7 @@ const RegisterVet = () => {
                                             Hospedaje
                                         </Checkbox>
                                         <Checkbox
+                                            data-testid={'grooming-test'}
                                             value="Grooming"
                                             onChange={(e) =>
                                                 setDicServices((prevTest) => ({
@@ -256,6 +267,7 @@ const RegisterVet = () => {
                                             Grooming
                                         </Checkbox>
                                         <Checkbox
+                                            data-testid={'desparacitacion-test'}
                                             value="Desparacitacion"
                                             onChange={(e) =>
                                                 setDicServices((prevTest) => ({
@@ -268,6 +280,7 @@ const RegisterVet = () => {
                                             Desparacitacion
                                         </Checkbox>
                                         <Checkbox
+                                            data-testid={'castraciones-test'}
                                             value="Castraciones"
                                             onChange={(e) =>
                                                 setDicServices((prevTest) => ({
@@ -280,6 +293,7 @@ const RegisterVet = () => {
                                             Castraciones
                                         </Checkbox>
                                         <Checkbox
+                                            data-testid={'operacion-test'}
                                             value="Operacion"
                                             onChange={(e) =>
                                                 setDicServices((prevTest) => ({
@@ -308,14 +322,21 @@ const RegisterVet = () => {
                                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                     />
-                                    <LocateMarker />
+                                    <LocateMarker
+                                        data-testid={'map-container-test'}
+                                    />
                                 </MapContainer>
 
                                 {position !== null && (
-                                    <p>
-                                        Lat: {position.lat}, Long:{' '}
-                                        {position.lng}{' '}
-                                    </p>
+                                    <div>
+                                        <p data-testid={'coords-text'}>
+                                            Coordenadas Seleccionadas
+                                        </p>
+                                        <p>
+                                            Lat: {position.lat}, Long:{' '}
+                                            {position.lng}{' '}
+                                        </p>
+                                    </div>
                                 )}
 
                                 <InputComponent
