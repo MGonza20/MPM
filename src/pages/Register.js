@@ -6,8 +6,6 @@ import '../styles/register.css'
 let user_type = 'vet'
 
 const Register = () => {
-    // const [nombre, setNombre] = useState('')
-    // const [apellido, setApellido] = useState('')
     const [user, setUser] = useState('')
     const [correo, setCorreo] = useState('')
     const [contra1, setContra1] = useState('')
