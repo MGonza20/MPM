@@ -16,12 +16,10 @@
 
 import React from 'react'
 import '../styles/landingPage.css'
-import HeaderComponent from './components/HeaderComponent'
 
 function Main() {
     return (
-        <div>
-            <HeaderComponent className="header" />
+        <div data-testid={'main-test'}>
             <div>
                 <div className="textCont">
                     <div className="text">

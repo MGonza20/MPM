@@ -20,8 +20,7 @@ import '../styles/register.css'
 
 const FAQ = () => {
     return (
-        
-        <div className="provisionalBackgorund">
+        <div className="provisionalBackgorund" data-testid={'faq-test'}>
             <div className="faqCont container">
                 <div className="titleContainer">
                     <Heading className="title">Preguntas Frecuentes</Heading>
@@ -112,7 +111,6 @@ const FAQ = () => {
                 </div>
             </div>
         </div>
-        
     )
 }
 
