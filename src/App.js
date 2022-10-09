@@ -13,7 +13,8 @@ import MapVet from './pages/MapVet'
 
 const App = () => {
     return (
-        <Routes>
+
+        <Routes data-testid={'app-test'}>
             <Route
                 path="/"
                 element={
