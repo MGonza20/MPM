@@ -15,14 +15,15 @@ describe('Register component Testings', () => {
         const infoElement = screen.getByTestId('login-test')
         expect(infoElement).toBeInTheDocument()
     })
-    // test('Testing if there is a Form' , async () => {
-    //     render(<Login/>)
+
+    // test('Testing if there is a Form', () => {
+    //     render(<Login />)
     //     const loginElement = screen.getAllByRole('form')
     //     expect(loginElement.length).toBeGreaterThanOrEqual(1)
     // })
 
-    // test('Testing good amount of divs' , async () => {
-    //     render(<Login/>)
+    // test('Testing good amount of divs', () => {
+    //     render(<Login />)
     //     const loginElement = screen.getAllByRole('div')
     //     expect(loginElement.length).toBeGreaterThan(1)
     // })
