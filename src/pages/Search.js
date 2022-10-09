@@ -103,7 +103,7 @@ function Search() {
             return (
                 <>
                     <form>
-                        <div className="SearchOuterContainer2">
+                        <div className="SearchOuterContainer2" >
                             <FormControl>
                                 <label>Emergencia</label>
                                 <Select
@@ -287,8 +287,8 @@ function Search() {
     return (
         <>
             {!seePopup && (
-                <>
-                    <div className="searchWrap">
+                <div data-testid= "search-id">
+                    <div className="searchWrap" >
                         <Input
                             value={value}
                             onChange={handleChange}
@@ -311,7 +311,7 @@ function Search() {
                             &#x1F50D;{' '}
                         </Button>
                     </div>
-                </>
+                </div>
             )}
             {!seePopup && <SeeSearch />}
             {seePopup && (

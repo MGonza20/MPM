@@ -46,7 +46,7 @@ const App = () => {
                 element={
                     <>
                         {' '}
-                        <Login />{' '}
+                        <HeaderComponent /> <Login />{' '}
                     </>
                 }
             ></Route>

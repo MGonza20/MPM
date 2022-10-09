@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import InputComponent from './components/InputComponent'
 import { Heading, Button } from '@chakra-ui/react'
 import '../styles/register.css'
-import HeaderComponent from './components/HeaderComponent'
 
 const Login = () => {
     const [correo, setCorreo] = useState('')
@@ -54,13 +53,14 @@ const Login = () => {
 
     return (
         <div data-testid={'login-test'}>
-            <div>        
-                <HeaderComponent className="header" />
+            <div>
                 <div className="provisionalBackgorund">
                     <div className="faqCont container">
                         <div className="infoContainer">
                             <div className="titleContainer">
-                                <Heading className="title">Iniciar Sesión</Heading>
+                                <Heading className="title">
+                                    Iniciar Sesión
+                                </Heading>
                             </div>
                             <form onSubmit={handleSubmit}>
                                 <InputComponent
@@ -85,11 +85,11 @@ const Login = () => {
                                     width="100%"
                                     marginTop="10px"
                                 >
-                                Aceptar
+                                    Aceptar
                                 </Button>
                             </form>
                             <p className="questionCont">
-                            ¿No tienes cuenta?{' '}
+                                ¿No tienes cuenta?{' '}
                                 <a href="/register">
                                     <b className="highlight">¡Registrate!</b>
                                 </a>
@@ -100,7 +100,6 @@ const Login = () => {
                 </div>
             </div>
         </div>
-        
     )
 }
 

@@ -23,7 +23,7 @@ import { Link } from 'react-router-dom'
 const HeaderComponent = () => {
     return (
         <>
-            <nav className="header">
+            <nav className="header" data-testid={'header-test'}>
                 <Link to={'/'}>
                     {' '}
                     <h1 className="logo">

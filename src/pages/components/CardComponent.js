@@ -11,7 +11,11 @@ const CardComponent = ({ vet, image, setSeePopup, setSelectedVet }) => {
     }
 
     return (
-        <div className="CardCont" onClick={handleClick}>
+        <div
+            className="CardCont"
+            onClick={handleClick}
+            data-testid={'card-component-test'}
+        >
             <Stack align="center">
                 <Image
                     className="imgS"
