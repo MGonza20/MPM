@@ -23,8 +23,11 @@ const OptionComponent = ({
     }
 
     return (
-        <div className="SearchOuterContainer2">
-            <h1>{title}</h1>
+        <div
+            data-testid={'option-component-test'}
+            className="SearchOuterContainer2"
+        >
+            <h1 data-testid={'title-option-component'}>{title}</h1>
             <Select placeholder={message} focusBorderColor={colors.verde}>
                 <option value="option1">{opcion1}</option>
                 <option value="option2">{opcion2}</option>
