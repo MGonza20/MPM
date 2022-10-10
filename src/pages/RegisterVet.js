@@ -120,6 +120,7 @@ const RegisterVet = () => {
                                             value="Vacunacion"
                                             onChange={(e) =>
                                                 setDicServices((prevTest) => ({
+                                                    // ! - Probar desde aquí...
                                                     ...prevTest,
                                                     vacunacion:
                                                         e.target.checked,
@@ -323,8 +324,9 @@ const RegisterVet = () => {
                                     <FormLabel>Hora de cierre</FormLabel>
                                     <Input
                                         data-testid={'cierre-test'}
-                                        onChange={(event) =>
-                                            setCierre(event.target.value)
+                                        onChange={
+                                            (event) =>
+                                                setCierre(event.target.value) // ! ... Hasta acá
                                         }
                                         title="Hora de cierre"
                                         size="md"

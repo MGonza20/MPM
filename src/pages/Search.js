@@ -57,16 +57,13 @@ function Search() {
         },
     }
 
-    const getVets = () => {
-        (async () => {
-            const data = await GetVets()
-            if (!data['success']) {
-                alert(data['error'])
-            } else {
-                console.log(data)
-                setPosts(data['data'])
-            }
-        })()
+    const getVets = async () => {
+        const data = await GetVets()
+        if (!data['success']) {
+            alert(data['error'])
+        } else {
+            setPosts(data['data'])
+        }
     }
 
     const filterVet = () => {
@@ -103,7 +100,7 @@ function Search() {
             return (
                 <>
                     <form>
-                        <div className="SearchOuterContainer2" >
+                        <div className="SearchOuterContainer2">
                             <FormControl>
                                 <label>Emergencia</label>
                                 <Select
@@ -287,8 +284,8 @@ function Search() {
     return (
         <>
             {!seePopup && (
-                <div data-testid= "search-id">
-                    <div className="searchWrap" >
+                <div data-testid="search-id">
+                    <div className="searchWrap">
                         <Input
                             value={value}
                             onChange={handleChange}

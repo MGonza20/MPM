@@ -29,30 +29,54 @@ describe('Register Vet Component Testings', () => {
         expect(onSubmit).toHaveBeenCalled()
     })
 
-    test('Verify CheckBoxes [onChange] of the Form', () => {
-        // Testeo de setDicServices y CheckBoxes
+    test('Verify CheckBoxes of the Form', () => {
         render(
             <MemoryRouter>
                 <RegisterVet />
             </MemoryRouter>
         )
-        // -> Vacunacion [vacunacion-test]
-        const vacunacion = screen.getByTestId('vacunacion-test')
-        expect(vacunacion).toBeEnabled()
 
-        // -> Rayos X [rayos-x-test]
+        const [
+            Vacunacion,
+            RayosX,
+            ExamenesCorporales,
+            Hematologias,
+            Hospedajes,
+            Grooming,
+            Desparacitacion,
+            Castraciones,
+            Operacion,
+        ] = screen.getAllByRole('checkbox')
+        
+        userEvent.dblClick(Vacunacion)
+        expect(Vacunacion).not.toBeChecked()
+        
+        userEvent.dblClick(RayosX)
+        expect(RayosX).not.toBeChecked()
+                
+        userEvent.dblClick(ExamenesCorporales)
+        expect(ExamenesCorporales).not.toBeChecked()
+                
+        userEvent.dblClick(Hematologias)
+        expect(Hematologias).not.toBeChecked()
 
-        // const rayos_x = screen.getByTestId('rayos-x-test')
-        // expect(rayos_x).toBeEnabled()
+        userEvent.dblClick(Hospedajes)
+        expect(Hospedajes).not.toBeChecked()
 
-        // -> Examenes Corporales [examenes-corporales-test]
-        // -> Hematologías [hematologias-test]
-        // -> Hospedaje [hospedaje-test]
-        // -> Grooming [grooming-test]
-        // -> Desparacitacion [desparacitacion-test]
-        // -> Castraciones [castraciones-test]
-        // -> Operacion [operacion-test]
-        // -> Hora de apertura [apertura-test]
-        // -> Hora de cierre [cierre-test]
+        userEvent.dblClick(Grooming)
+        expect(Grooming).not.toBeChecked()
+
+        userEvent.dblClick(Desparacitacion)
+        expect(Desparacitacion).not.toBeChecked()
+
+        userEvent.dblClick(Castraciones)
+        expect(Castraciones).not.toBeChecked()
+
+        userEvent.dblClick(Operacion)
+        expect(Operacion).not.toBeChecked()
     })
+
+    // test('Verify Form Label of the Form', () => {
+        
+    // })
 })

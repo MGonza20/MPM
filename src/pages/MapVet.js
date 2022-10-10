@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { MapContainer, Marker, TileLayer, Tooltip, useMap } from 'react-leaflet'
 import { Icon } from 'leaflet'
-import L from 'leaflet'
 
 import '../styles/map.css'
 
 import VetPopup from './VetPopup'
+import LocationMarker from './components/LocationMarker'
+
 import GetVets from './functions/GetVets'
 
 const iconVet = new Icon({
@@ -16,47 +17,7 @@ const iconVet = new Icon({
     iconSize: [48, 48],
 })
 
-const iconHouse = new Icon({
-    iconSize: [25, 41],
-    iconAnchor: [10, 41],
-    popupAnchor: [2, -40],
-    iconUrl: 'https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png',
-    shadowUrl: 'https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png',
-})
-
 const centerPosition = [14.6050635, -90.4893286]
-
-const LocationMarker = () => {
-    const [position, setPosition] = useState(null)
-
-    const map = useMap()
-
-    useEffect(() => {
-        map.locate().on('locationfound', function (e) {
-            setPosition(e.latlng)
-            map.flyTo(e.latlng, map.getZoom())
-            const radius = e.accuracy
-            const circle = L.circle(e.latlng, radius)
-            circle.addTo(map)
-        })
-    }, [map])
-
-    return position == null ? null : (
-        <Marker
-            position={position}
-            icon={iconHouse}
-            eventHandlers={{
-                click: (e) => {
-                    map.flyTo(e.latlng, map.getZoom())
-                },
-            }}
-        >
-            <Tooltip>
-                Tu estas aquí <br />
-            </Tooltip>
-        </Marker>
-    )
-}
 
 const MapVet = () => {
     const [vets, setVets] = useState(null)
@@ -70,15 +31,17 @@ const MapVet = () => {
         },
     }
 
+    const fetchVets = async () => {
+        const data = await GetVets()
+        if (!data['success']) {
+            alert(data['error'])
+        } else {
+            setVets(data['data'])
+        }
+    }
+
     React.useEffect(() => {
-        (async () => {
-            const data = await GetVets()
-            if (!data['success']) {
-                alert(data['error'])
-            } else {
-                setVets(data['data'])
-            }
-        })()
+        fetchVets()
     }, [])
 
     const AddVet = ({ lat, long, vet }) => {
@@ -128,7 +91,7 @@ const MapVet = () => {
     }
 
     return (
-        <div>
+        <div data-testid={'all-map-page-test'}>
             {seePopup && (
                 <VetPopup vet={seeInfo} regretOriginal={setSeePopup} />
             )}

@@ -5,7 +5,6 @@ const NewVet = (theNewVet, dicServices, position) => {
 
     const services = []
     for (const [key, value] of Object.entries(dicServices)) {
-        console.log(key + ' -+- ' + value)
         if (value === true) {
             services.push(key)
         }
