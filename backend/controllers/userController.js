@@ -13,14 +13,14 @@ const registerUser = asyncHandler(async(req, res) => {
 
     if(!name || !email || !password){
         res.status(400)
-        throw new Error('Please add all fields')
+        throw new Error('Añada todos los campos')
     }
 
     //Checking if user exists
     const userExists = await User.findOne({email})
     if(userExists){
         res.status(400)
-        throw new Error('User alredy exists')
+        throw new Error('El nombre de usuario ya existe')
     }
 
     //Hash password
@@ -42,7 +42,7 @@ const registerUser = asyncHandler(async(req, res) => {
     } 
     else {
         res.status(400)
-        throw new Error('Invalid user data')
+        throw new Error('Datox inválidos')
     }
 })
 
@@ -63,7 +63,7 @@ const loginUser = asyncHandler( async(req, res) => {
         })
     } else {
         res.status(400)
-        throw new Error('Invalid credentials')
+        throw new Error('Datos incorrectos')
     }
 })
 

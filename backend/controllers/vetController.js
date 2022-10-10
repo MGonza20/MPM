@@ -62,7 +62,7 @@ const setVetinfo = asyncHandler(async (req, res) => {
     console.log(req.body.name)
     if (!req.body.name) {
         res.status(400)
-        throw new Error('Please add a text field')
+        throw new Error('Añada los campos necesarios')
     }
 
     const vet = await Vet.create({
@@ -91,7 +91,7 @@ const updateVetinfo = asyncHandler(async (req, res) => {
 
     if (!vet) {
         res.status(400)
-        throw new Error('Vet not found')
+        throw new Error('No se encontró al veterinario')
     }
 
     const updatedVet = await Vet.findByIdAndUpdate(req.params.id, req.body, {
@@ -109,7 +109,7 @@ const deleteVetinfo = asyncHandler(async (req, res) => {
 
     if (!vet) {
         res.status(400)
-        throw new Error('Vet not found')
+        throw new Error('No se encontró al veterinario')
     }
 
     await vet.remove()
