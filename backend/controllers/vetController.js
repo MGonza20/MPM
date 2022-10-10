@@ -66,7 +66,7 @@ const setVetinfo = asyncHandler(async (req, res) => {
     }
 
     const vet = await Vet.create({
-        user: req.user.id,
+        // user: req.user.id,
         name: req.body.name,
         direction: req.body.direction,
         email: req.body.email,
