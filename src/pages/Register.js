@@ -36,7 +36,7 @@ const Register = () => {
                 <div className="outerContainer container">
                     <div className="infoContainer">
                         <div className="titleContainer">
-                            <Heading className="title">Crea una cuenta</Heading>
+                            <Heading className="title">Cree una cuenta</Heading>
                         </div>
 
                         <form onSubmit={onSubmit}>
@@ -106,9 +106,9 @@ const Register = () => {
 
                         </form>
                         <p className="questionCont">
-                            ¿No tienes cuenta?{' '}
+                            ¿Tiene cuenta?{' '}
                             <a href="./Login">
-                                <b className="highlight">¡Registrate!</b>
+                                <b className="highlight">¡Inicie Sesión!</b>
                             </a>
                         </p>
                     </div>
