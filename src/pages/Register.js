@@ -15,6 +15,7 @@ const Register = () => {
         password: '',
         password2: '',
     })
+    const [equals, setEquals] = useState('') 
 
     const { name, email, password, password2 } = formData
     const navigate = useNavigate()
@@ -48,7 +49,9 @@ const Register = () => {
 
         if (password !== password2) {
             toast.error('Las contraseñas no son iguales')
+            setEquals('not match')
         } else {
+            setEquals('match')
             const userData = {
                 name,
                 email,
@@ -58,8 +61,19 @@ const Register = () => {
         }
     }
 
+    const style = {color : 'white'}
+
+    const passEqual = (pass) => {
+        if (pass === 'match') {
+          return (<p style={style}>match</p>);
+        } else if (pass === 'not match') {
+          return (<p style={style}>not match</p>);
+        }
+      };
+
     const colors = {
         verde: 'rgb(174 213 142)',
+        blanco: 'rgb(255, 255, 255)',
     }
     
 
@@ -144,6 +158,7 @@ const Register = () => {
                                 <b className="highlight">¡Inicie Sesión!</b>
                             </a>
                         </p>
+                        <div>{passEqual(equals)}</div>
                     </div>
                     <div className="innerContainer"></div>
                 </div>
