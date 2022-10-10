@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "2ee364a5-1306-45df-9c33-34c632d0d165",
+		"name": "my-pet-n-me",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23485882"
+	},
+	"item": [
+		{
+			"name": "prueba post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"\",\r\n    \"direction\": { \"city\": \"Guatemala\", \"zone\": 24, \"address\": \"Manzana 4 Lote 77\" },\r\n    \"email\": \"pruebavet@gmail.com\",\r\n    \"services\": [\"Uno\", \"Dos\"],\r\n    \"lat\": \"jaja\",\r\n    \"long\": -90.45117974281311,\r\n    \"phone\": \"a111-1111\",\r\n    \"emergency\": true,\r\n    \"open_time\": \"09:30\",\r\n    \"close_time\": \"17:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/vets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all vets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/vets/get_all_vets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vets",
+						"get_all_vets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/vets/63439ce41356680f094a6f07",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vets",
+						"63439ce41356680f094a6f07"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change by id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Cambio de nombre\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/vets/63439dfdfb230d71ca3cd6ad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vets",
+						"63439dfdfb230d71ca3cd6ad"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
