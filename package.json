@@ -64,7 +64,11 @@
             "!src/pages/functions/FetchVets.js",
             "!src/app/store.js",
             "!src/features/auth/authService.js",
-            "!src/features/auth/authSlice.js"
+            "!src/features/auth/authSlice.js",
+            "!src/App.js",
+            "!src/pages/Login.js",
+            "!src/pages/Register.js",
+            "!src/pages/components/HeaderComponent.js"
         ]
     }
 }
