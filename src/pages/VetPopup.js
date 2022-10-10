@@ -50,7 +50,7 @@ const VetPopup = ({ vet, regretOriginal }) => {
                     <Skeleton height="20px" />
                 </div>
             </div>
-            <footer className="footer-section">
+            <footer className="footer-section" data-testid={'vet-footer'}>
                 <div className="container">
                     <div className="footer-cta pt-5 pb-5">
                         <div className="row">
