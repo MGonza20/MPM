@@ -47,16 +47,16 @@ describe('Register Vet Component Testings', () => {
             Castraciones,
             Operacion,
         ] = screen.getAllByRole('checkbox')
-        
+
         userEvent.dblClick(Vacunacion)
         expect(Vacunacion).not.toBeChecked()
-        
+
         userEvent.dblClick(RayosX)
         expect(RayosX).not.toBeChecked()
-                
+
         userEvent.dblClick(ExamenesCorporales)
         expect(ExamenesCorporales).not.toBeChecked()
-                
+
         userEvent.dblClick(Hematologias)
         expect(Hematologias).not.toBeChecked()
 
@@ -76,7 +76,21 @@ describe('Register Vet Component Testings', () => {
         expect(Operacion).not.toBeChecked()
     })
 
-    // test('Verify Form Label of the Form', () => {
-        
-    // })
+    test('Verify Form Label of the Form', () => {
+        render(
+            <MemoryRouter>
+                <RegisterVet />
+            </MemoryRouter>
+        )
+
+        const aperturaInput = screen.getByTestId('apertura-test')
+        aperturaInput.setSelectionRange(0, 4)
+        userEvent.type(aperturaInput, '08:00')
+        expect(aperturaInput).toHaveValue('08:00')
+
+        const cierreInput = screen.getByTestId('cierre-test')
+        cierreInput.setSelectionRange(0, 4)
+        userEvent.type(cierreInput, '20:00')
+        expect(cierreInput).toHaveValue('20:00')
+    })
 })

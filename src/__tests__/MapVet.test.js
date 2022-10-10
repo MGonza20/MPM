@@ -7,5 +7,8 @@ describe('Main Component Testings', () => {
         render(<MapVet />)
         const mapvetElement = screen.getByTestId('all-map-page-test')
         expect(mapvetElement).toBeInTheDocument()
+
+        const mapContainer = screen.getByTestId('map-vet-test')
+        expect(mapContainer).toBeInTheDocument()
     })
 })

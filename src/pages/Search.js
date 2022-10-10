@@ -18,7 +18,7 @@ import {
     useDisclosure,
 } from '@chakra-ui/react'
 
-import GetVets from './functions/GetVets'
+import FetchVets from './functions/FetchVets'
 
 function Search() {
     const [posts, setPosts] = useState(null)
@@ -32,7 +32,7 @@ function Search() {
     const handleChange = (event) => setValue(event.target.value)
 
     useEffect(() => {
-        getVets()
+        FetchVets(setPosts)
     }, [])
 
     const idxOfLastPost = currentPage * postsPerPage
@@ -55,19 +55,6 @@ function Search() {
         pagination: {
             listStyle: 'none',
         },
-    }
-
-    const getVets = async () => {
-        const data = await GetVets()
-        if (!data['success']) {
-            alert(data['error'])
-        } else {
-            setPosts(data['data'])
-        }
-    }
-
-    const filterVet = () => {
-        alert('FILTER VET :)')
     }
 
     class FilterFrom extends React.Component {
@@ -302,7 +289,7 @@ function Search() {
                             }}
                             color="#fff"
                             grid-column="8"
-                            onClick={filterVet}
+                            onClick={() => alert('HOLA :)')}
                         >
                             {' '}
                             &#x1F50D;{' '}

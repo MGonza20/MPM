@@ -33,8 +33,8 @@ const RegisterVet = () => {
     const [dicServices, setDicServices] = useState({})
     const [telefono, setTelefono] = useState('')
     const [emergencia, setEmergencia] = useState('')
-    const [apertura, setApertura] = useState('')
-    const [cierre, setCierre] = useState('')
+    const [apertura, setApertura] = useState('08:00')
+    const [cierre, setCierre] = useState('20:00')
     const [position, setPosition] = useState(null)
 
     const handleAddVet = async (event) => {
