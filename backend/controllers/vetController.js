@@ -9,7 +9,7 @@ const Vet = require('../models/vetModel')
 // @access  Public
 const getVets = asyncHandler(async (req, res) => {
     console.log('VETS')
-    const vets = await Vet.find()
+    const vets = await Vet.find({ verified: true })
     res.status(200).json({ success: true, data: vets })
 })
 
@@ -77,7 +77,7 @@ const setVetinfo = asyncHandler(async (req, res) => {
         vet_type: req.body.vet_type,
         open_time: req.body.open_time,
         close_time: req.body.close_time,
-        verified: false,
+        verified: true,
     })
 
     res.status(200).json({ success: true})
