@@ -29,39 +29,6 @@ describe('Register Vet Component Testings', () => {
         expect(onSubmit).toHaveBeenCalled()
     })
 
-    // test('Testing Click of Locate Marker', async () => {
-    //     // Lineas 40-42 [map-container-test] // Si no funciona entonces se introducirá en LocateMarker
-    //     // [coords-text]
-
-    //     render(
-    //         <MemoryRouter>
-    //             <RegisterVet />
-    //         </MemoryRouter>
-    //     )
-    //     // const mapContainerElement = screen.getByTestId('map-container-test')
-    //     userEvent.click(screen.getByTestId('map-container-test'))
-    //     // fireEvent.click(screen.getByTestId('map-container-test'))
-    //     // act(() => {
-    //     //     fireEvent.click(screen.getByTestId('map-container-test'))
-    //     // })
-
-    //     const coordsText = screen.getByTestId('coords-text')
-    //     expect(coordsText).toHaveTextContent('Coordenadas Seleccionadas')
-    // })
-
-    // test('Testing Handle Add Vet', () => {
-    //     // Lineas 53-54, 58-60, 69-104
-    // })
-
-    // test('Testing Getters Of Register Vet', () => {
-    //     // Testeando los Input Components para ver Comportamiento de los Getters
-    //     // -> [get-nombre-test]
-    //     // -> [get-ciudad-test]
-    //     // -> [get-zona-test]
-    //     // -> [get-direccion-test]
-    //     // -> [get-correo-test]
-    // })
-
     test('Verify CheckBoxes [onChange] of the Form', () => {
         // Testeo de setDicServices y CheckBoxes
         render(
@@ -85,5 +52,7 @@ describe('Register Vet Component Testings', () => {
         // -> Desparacitacion [desparacitacion-test]
         // -> Castraciones [castraciones-test]
         // -> Operacion [operacion-test]
+        // -> Hora de apertura [apertura-test]
+        // -> Hora de cierre [cierre-test]
     })
 })
