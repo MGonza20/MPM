@@ -7,6 +7,101 @@
 	},
 	"item": [
 		{
+			"name": "listas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response is an array\", function () {",
+							"    pm.response.to.be.an.array; ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{example_api_key}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3002/items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"items"
+					]
+				},
+				"description": "A `GET` to the `/items` endpoint allows your application to fetch a list of all items.\n\nLook under **Examples** to view an example response."
+			},
+			"response": [
+				{
+					"name": "Fetch a list of items",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{example_api_key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3002/items?Authorization=Bearer {{example_api_key}}&Content-type=application/json",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"items"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Bearer {{example_api_key}}"
+								},
+								{
+									"key": "Content-type",
+									"value": "application/json"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "[\n    {\n        \"item_id\": \"304829\",\n        \"name\": \"delicata\",\n        \"price\": \"0.79\",\n        \"unit\": \"lb\",\n        \"currency\": \"USD\"\n    },\n    {\n        \"item_id\": \"304830\",\n        \"name\": \"butternut\",\n        \"price\": \"0.59\",\n        \"unit\": \"lb\",\n        \"currency\": \"USD\"\n    },\n    {\n        \"item_id\": \"304831\",\n        \"name\": \"acorn\",\n        \"price\": \"0.49\",\n        \"unit\": \"lb\",\n        \"currency\": \"USD\"\n    }\n]"
+				}
+			]
+		},
+		{
 			"name": "prueba post",
 			"request": {
 				"method": "POST",
@@ -102,6 +197,171 @@
 						"api",
 						"vets",
 						"63439dfdfb230d71ca3cd6ad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "status mpm",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// use the `pm.*` API to write your test",
+							"// the `pm.test()` method accepts 2 parameters",
+							"// the first parameter is the name of your test (be descriptive)",
+							"// the second parameter is a function whereby if any assertions within your function fail, then the test will fail",
+							"",
+							"pm.test(\"Name of the first test\", function () {",
+							"    // make an assertion",
+							"    // if your assertion throws an error, this test will fail",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Name of the second test\", function () {",
+							"    // make as many assertions as you'd like as part of this test",
+							"    // if any assertion throws an error, this test will fail",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.json;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?foo1=bar1&foo2=bar2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo1",
+							"value": "bar1"
+						},
+						{
+							"key": "foo2",
+							"value": "bar2"
+						}
+					]
+				},
+				"description": "In the Postman app, review the tests written under the **Tests** tab in the request builder on the top. Send this request, and view the results of the tests under the **Tests** tab in the response viewer on the bottom.\n\n### The `pm.*` API\n\nUse the `pm.*` API to write your test under the **Tests** tab in Postman. The `pm.test()` method accepts 2 parameters. The first parameter is the name of the test, so it's important to give your test a descriptive name to provide more information in case the test fails. The second parameter is a function whereby if any assertions within your function fail, then the test will fail.\n\n```\npm.test(\"Name of the second test\", function () {\n    // make as many assertions as you'd like as part of this test\n    // if any assertion throws an error, this test will fail\n    pm.response.to.have.status(200);\n    pm.response.to.be.ok;\n    pm.response.to.be.json;\n});\n```"
+			},
+			"response": [
+				{
+					"name": "Status",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://postman-echo.com/get?foo1=bar1&foo2=bar2",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"get"
+							],
+							"query": [
+								{
+									"key": "foo1",
+									"value": "bar1"
+								},
+								{
+									"key": "foo2",
+									"value": "bar2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Nov 2018 22:21:20 GMT"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1cd-LkUKVugbVYQuMcTU7OTzmp77cMo\""
+						},
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Content-Length",
+							"value": "348"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"args\": {\n        \"foo1\": \"bar1\",\n        \"foo2\": \"bar2\"\n    },\n    \"headers\": {\n        \"x-forwarded-proto\": \"https\",\n        \"host\": \"postman-echo.com\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"cookie\": \"sails.sid=s%3AK8csWt5VZ3Oalv85HiBtffDcrSOJ-RiP.V14RjjJqkOv8%2BLXuHRmZ9l50G8S6eU16yLU%2F3N%2F0dKU\",\n        \"postman-token\": \"c6b9bca5-7369-4da8-a539-6c906d1133f2\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\"\n    },\n    \"url\": \"https://postman-echo.com/get?foo1=bar1&foo2=bar2\"\n}"
+				}
+			]
+		},
+		{
+			"name": "get all vets json verification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Valid connection\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is a json\", function () {\r",
+							"    pm.response.to.be.json; \r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/vets/get_all_vets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vets",
+						"get_all_vets"
 					]
 				}
 			},
