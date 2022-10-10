@@ -29,61 +29,68 @@ describe('Register Vet Component Testings', () => {
         expect(onSubmit).toHaveBeenCalled()
     })
 
-    // test('Testing Click of Locate Marker', async () => {
-    //     // Lineas 40-42 [map-container-test] // Si no funciona entonces se introducirá en LocateMarker
-    //     // [coords-text]
-
-    //     render(
-    //         <MemoryRouter>
-    //             <RegisterVet />
-    //         </MemoryRouter>
-    //     )
-    //     // const mapContainerElement = screen.getByTestId('map-container-test')
-    //     userEvent.click(screen.getByTestId('map-container-test'))
-    //     // fireEvent.click(screen.getByTestId('map-container-test'))
-    //     // act(() => {
-    //     //     fireEvent.click(screen.getByTestId('map-container-test'))
-    //     // })
-
-    //     const coordsText = screen.getByTestId('coords-text')
-    //     expect(coordsText).toHaveTextContent('Coordenadas Seleccionadas')
-    // })
-
-    // test('Testing Handle Add Vet', () => {
-    //     // Lineas 53-54, 58-60, 69-104
-    // })
-
-    // test('Testing Getters Of Register Vet', () => {
-    //     // Testeando los Input Components para ver Comportamiento de los Getters
-    //     // -> [get-nombre-test]
-    //     // -> [get-ciudad-test]
-    //     // -> [get-zona-test]
-    //     // -> [get-direccion-test]
-    //     // -> [get-correo-test]
-    // })
-
-    test('Verify CheckBoxes [onChange] of the Form', () => {
-        // Testeo de setDicServices y CheckBoxes
+    test('Verify CheckBoxes of the Form', () => {
         render(
             <MemoryRouter>
                 <RegisterVet />
             </MemoryRouter>
         )
-        // -> Vacunacion [vacunacion-test]
-        const vacunacion = screen.getByTestId('vacunacion-test')
-        expect(vacunacion).toBeEnabled()
 
-        // -> Rayos X [rayos-x-test]
+        const [
+            Vacunacion,
+            RayosX,
+            ExamenesCorporales,
+            Hematologias,
+            Hospedajes,
+            Grooming,
+            Desparacitacion,
+            Castraciones,
+            Operacion,
+        ] = screen.getAllByRole('checkbox')
 
-        // const rayos_x = screen.getByTestId('rayos-x-test')
-        // expect(rayos_x).toBeEnabled()
+        userEvent.dblClick(Vacunacion)
+        expect(Vacunacion).not.toBeChecked()
 
-        // -> Examenes Corporales [examenes-corporales-test]
-        // -> Hematologías [hematologias-test]
-        // -> Hospedaje [hospedaje-test]
-        // -> Grooming [grooming-test]
-        // -> Desparacitacion [desparacitacion-test]
-        // -> Castraciones [castraciones-test]
-        // -> Operacion [operacion-test]
+        userEvent.dblClick(RayosX)
+        expect(RayosX).not.toBeChecked()
+
+        userEvent.dblClick(ExamenesCorporales)
+        expect(ExamenesCorporales).not.toBeChecked()
+
+        userEvent.dblClick(Hematologias)
+        expect(Hematologias).not.toBeChecked()
+
+        userEvent.dblClick(Hospedajes)
+        expect(Hospedajes).not.toBeChecked()
+
+        userEvent.dblClick(Grooming)
+        expect(Grooming).not.toBeChecked()
+
+        userEvent.dblClick(Desparacitacion)
+        expect(Desparacitacion).not.toBeChecked()
+
+        userEvent.dblClick(Castraciones)
+        expect(Castraciones).not.toBeChecked()
+
+        userEvent.dblClick(Operacion)
+        expect(Operacion).not.toBeChecked()
+    })
+
+    test('Verify Form Label of the Form', () => {
+        render(
+            <MemoryRouter>
+                <RegisterVet />
+            </MemoryRouter>
+        )
+
+        const aperturaInput = screen.getByTestId('apertura-test')
+        aperturaInput.setSelectionRange(0, 4)
+        userEvent.type(aperturaInput, '08:00')
+        expect(aperturaInput).toHaveValue('08:00')
+
+        const cierreInput = screen.getByTestId('cierre-test')
+        cierreInput.setSelectionRange(0, 4)
+        userEvent.type(cierreInput, '20:00')
+        expect(cierreInput).toHaveValue('20:00')
     })
 })

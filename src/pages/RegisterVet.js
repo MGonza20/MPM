@@ -16,7 +16,13 @@ import {
 import '../styles/form.css'
 
 // Librerias para usar el Mapa
-import { MapContainer, TileLayer, useMapEvents, Marker } from 'react-leaflet'
+import { MapContainer, TileLayer } from 'react-leaflet'
+
+// Método para tener un nuevo Vet
+import NewVet from './functions/NewVet'
+
+// Implementar Componentes Extras
+import LocateMarker from './components/LocateMarker'
 
 const RegisterVet = () => {
     const [nombre, setNombre] = useState('')
@@ -27,109 +33,29 @@ const RegisterVet = () => {
     const [dicServices, setDicServices] = useState({})
     const [telefono, setTelefono] = useState('')
     const [emergencia, setEmergencia] = useState('')
-    const [apertura, setApertura] = useState('')
-    const [cierre, setCierre] = useState('')
+    const [apertura, setApertura] = useState('08:00')
+    const [cierre, setCierre] = useState('20:00')
     const [position, setPosition] = useState(null)
 
-    const LocateMarker = () => {
-        // Métodos para obtener la ubicacion
-        const map = useMapEvents({
-            click(e) {
-                map.locate()
-                setPosition(e.latlng)
-                map.flyTo(e.latlng, map.getZoom())
-            },
-        })
-
-        return position === null ? null : <Marker position={position}></Marker>
-    }
-
-    const handleAddVet = (event) => {
+    const handleAddVet = async (event) => {
         event.preventDefault()
-
-        if (isNaN(telefono) && isNaN(zona)) {
-            alert('Debe ingresar solo numeros en telefono y zona.')
-            return
-        } else {
-            const services = []
-            for (const [key, value] of Object.entries(dicServices)) {
-                console.log(key + ' -+- ' + value)
-                if (value === true) {
-                    services.push(key)
-                }
-            }
-
-            if (services.length === 0) {
-                alert('Porfavor ingrese como mínimo un servicio')
-                return
-            }
-
-            if (position === null) {
-                alert('No has seleccionado una posicion/ubicacion en el mapa')
-                return
-            }
-
-            fetch('http://localhost:5000/api/vets', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: nombre,
-                    direction: { city: ciudad, zone: zona, address: direccion },
-                    email: correo,
-                    services: services,
-                    lat: position.lat,
-                    long: position.lng,
-                    phone: telefono,
-                    emergency: emergencia,
-                    open_time: apertura,
-                    close_time: cierre,
-                }),
-            })
-                .then((response) => response.json())
-                .then((result) => {
-                    if (result.success === true) {
-                        alert('Se agrego la nueva vet exitosamente')
-                    } else {
-                        alert(result.message)
-                    }
-                })
-                .catch((error) => {
-                    alert('Ocurrio un error inesperado: ' + error)
-                })
-                .then(() => {
-                    window.location.href = '/'
-                })
-        }
+        const infoNewVet = await NewVet(
+            {
+                nombre: nombre,
+                ciudad: ciudad,
+                zona: zona,
+                direccion: direccion,
+                correo: correo,
+                telefono: telefono,
+                emergencia: emergencia,
+                apertura: apertura,
+                cierre: cierre,
+            },
+            dicServices,
+            position
+        )
+        alert(infoNewVet.info)
     }
-
-    const getNombre = (name) => {
-        setNombre(name)
-    }
-
-    const getCiudad = (ciudad) => {
-        setCiudad(ciudad)
-    }
-
-    const getZona = (zona) => {
-        setZona(zona)
-    }
-
-    const getDireccion = (address) => {
-        setDireccion(address)
-    }
-
-    const getCorreo = (correo) => {
-        setCorreo(correo)
-    }
-
-    const getTelefono = (telefono) => {
-        setTelefono(telefono)
-    }
-
-    const handleChange = (event) => setCierre(event.target.value)
-    const handleChange2 = (event) => setApertura(event.target.value)
 
     return (
         <div data-testid={'register-vet'}>
@@ -148,34 +74,34 @@ const RegisterVet = () => {
                             >
                                 <InputComponent
                                     data-testid={'get-nombre-test'}
-                                    getter={getNombre}
+                                    getter={setNombre}
                                     title="Nombre"
                                     message="Ingresa el nombre del veterinario"
                                 />
                                 <InputComponent
                                     data-testid={'get-ciudad-test'}
-                                    getter={getCiudad}
+                                    getter={setCiudad}
                                     title="Ciudad"
                                     message="Ingresa la ciudad de tu veterinaria"
                                 />
 
                                 <InputComponent
                                     data-testid={'get-zona-test'}
-                                    getter={getZona}
+                                    getter={setZona}
                                     title="Zona"
                                     message="Ingresa la zona de tu veterinaria"
                                 />
 
                                 <InputComponent
                                     data-testid={'get-direccion-test'}
-                                    getter={getDireccion}
+                                    getter={setDireccion}
                                     title="Dirección"
                                     message="Ingresa la dirección de tu veterinaria"
                                 />
 
                                 <InputComponent
                                     data-testid={'get-correo-test'}
-                                    getter={getCorreo}
+                                    getter={setCorreo}
                                     title="Correo"
                                     message="Ingresa tu correo"
                                 />
@@ -194,6 +120,7 @@ const RegisterVet = () => {
                                             value="Vacunacion"
                                             onChange={(e) =>
                                                 setDicServices((prevTest) => ({
+                                                    // ! - Probar desde aquí...
                                                     ...prevTest,
                                                     vacunacion:
                                                         e.target.checked,
@@ -323,7 +250,8 @@ const RegisterVet = () => {
                                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                     />
                                     <LocateMarker
-                                        data-testid={'map-container-test'}
+                                        position={position}
+                                        setPosition={setPosition}
                                     />
                                 </MapContainer>
 
@@ -340,7 +268,7 @@ const RegisterVet = () => {
                                 )}
 
                                 <InputComponent
-                                    getter={getTelefono}
+                                    getter={setTelefono}
                                     title="Teléfono"
                                     message="12345678"
                                 />
@@ -382,7 +310,10 @@ const RegisterVet = () => {
                                 <FormControl isRequired>
                                     <FormLabel>Hora de apertura</FormLabel>
                                     <Input
-                                        onChange={handleChange2}
+                                        data-testid={'apertura-test'}
+                                        onChange={(event) =>
+                                            setApertura(event.target.value)
+                                        }
                                         title="Hora de apertura"
                                         size="md"
                                         type="time"
@@ -392,7 +323,11 @@ const RegisterVet = () => {
                                 <FormControl isRequired>
                                     <FormLabel>Hora de cierre</FormLabel>
                                     <Input
-                                        onChange={handleChange}
+                                        data-testid={'cierre-test'}
+                                        onChange={
+                                            (event) =>
+                                                setCierre(event.target.value) // ! ... Hasta acá
+                                        }
                                         title="Hora de cierre"
                                         size="md"
                                         type="time"

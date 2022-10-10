@@ -52,7 +52,12 @@
     "jest": {
         "collectCoverageFrom": [
             "src/**/*.{js,jsx}",
-            "!src/index.js"
+            "!src/index.js",
+            "!src/pages/components/AddVet.js",
+            "!src/pages/components/LocateMarker.js",
+            "!src/pages/components/LocationMarker.js",
+            "!src/pages/components/SeeVetInfo.js",
+            "!src/pages/functions/FetchVets.js"
         ]
     }
 }
