@@ -2,6 +2,11 @@ import { useState, useEffect } from 'react'
 import { Heading, Button } from '@chakra-ui/react'
 import '../styles/register.css'
 import { Input, FormLabel } from '@chakra-ui/react'
+import {useSelector, useDispatch} from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import {toast} from 'react-toastify'
+import {login, reset} from '../features/auth/authSlice'
+
 
 
 const Register = () => {
@@ -12,6 +17,25 @@ const Register = () => {
 
     const { email, password } = formData
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const {user, isError, isSuccess, message} = useSelector((state) => state.auth)
+
+    useEffect(() => {
+        if(isError){
+            toast.error(message)
+        }
+
+        if(isSuccess || user){
+            navigate('/RegisterVet')
+        }
+
+        dispatch(reset())
+
+    }, [user, isError, isSuccess, message, navigate, dispatch])
+
+
     const handleChange = (e) => {
         setFormData((prevState) => ({
             ...prevState, 
@@ -21,6 +45,11 @@ const Register = () => {
 
     const onSubmit = (e) => {
         e.preventDefault()
+        const userData = {
+            email,
+            password,
+        }
+        dispatch(login(userData))
     }
 
     const colors = {
