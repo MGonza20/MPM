@@ -61,7 +61,10 @@
             "!src/pages/components/LocateMarker.js",
             "!src/pages/components/LocationMarker.js",
             "!src/pages/components/SeeVetInfo.js",
-            "!src/pages/functions/FetchVets.js"
+            "!src/pages/functions/FetchVets.js",
+            "!src/app/store.js",
+            "!src/features/auth/authService.js",
+            "!src/features/auth/authSlice.js"
         ]
     }
 }

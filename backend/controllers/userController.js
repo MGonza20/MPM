@@ -8,17 +8,17 @@ const User = require('../models/userModel')
 // @desc   Register new user
 // @route  POST /api/users
 // @access Public
-const registerUser = asyncHandler(async(req, res) => {
-    const {name, email, password} = req.body
+const registerUser = asyncHandler(async (req, res) => {
+    const { name, email, password } = req.body
 
-    if(!name || !email || !password){
+    if (!name || !email || !password) {
         res.status(400)
         throw new Error('Añada todos los campos')
     }
 
     //Checking if user exists
-    const userExists = await User.findOne({email})
-    if(userExists){
+    const userExists = await User.findOne({ email })
+    if (userExists) {
         res.status(400)
         throw new Error('El nombre de usuario ya existe')
     }
@@ -29,18 +29,19 @@ const registerUser = asyncHandler(async(req, res) => {
 
     //Create user
     const user = await User.create({
-        name, email, password: hashedPassword
+        name,
+        email,
+        password: hashedPassword,
     })
 
-    if(user) {
+    if (user) {
         res.status(201).json({
             _id: user.id,
             name: user.name,
             email: user.email,
-            token: generateToken(user._id)
+            token: generateToken(user._id),
         })
-    } 
-    else {
+    } else {
         res.status(400)
         throw new Error('Datox inválidos')
     }
@@ -49,19 +50,24 @@ const registerUser = asyncHandler(async(req, res) => {
 // @desc   Authenticate a user
 // @route  POST /api/users/login
 // @access Public
-const loginUser = asyncHandler( async(req, res) => {
-    const {email, password} = req.body
+const loginUser = asyncHandler(async (req, res) => {
+    const { email, password } = req.body
+    console.log(req.body)
+    console.log(email)
+    console.log(password)
 
     //Check for user email
-    const user = await User.findOne({email})
-    if(user && (await bcrypt.compare(password, user.password))) {
+    const user = await User.findOne({ email })
+    if (user && (await bcrypt.compare(password, user.password))) {
+        console.log('TODO BIEN :)')
         res.json({
             _id: user.id,
             name: user.name,
             email: user.email,
-            token: generateToken(user._id)
+            token: generateToken(user._id),
         })
     } else {
+        console.log('ERROR :)')
         res.status(400)
         throw new Error('Datos incorrectos')
     }
@@ -70,9 +76,9 @@ const loginUser = asyncHandler( async(req, res) => {
 // @desc   Get user data
 // @route  GET /api/users/me
 // @access Private
-const getMe = asyncHandler( async(req, res) => {
-    const {_id, name, email} = await User.findById(req.user.id)
-    
+const getMe = asyncHandler(async (req, res) => {
+    const { _id, name, email } = await User.findById(req.user.id)
+
     res.status(200).json({
         id: _id,
         name,
@@ -86,7 +92,6 @@ const generateToken = (id) => {
         expiresIn: '30d',
     })
 }
-
 
 module.exports = {
     registerUser,
