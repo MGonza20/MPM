@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 const asyncHandler = require('express-async-handler')
 
 const Vet = require('../models/vetModel')
@@ -6,14 +8,16 @@ const Vet = require('../models/vetModel')
 // @route   GET /api/vets
 // @access  Public
 const getVets = asyncHandler(async (req, res) => {
-    const vets = await Vet.find({ verified: true })
+    console.log('VETS')
+    const vets = await Vet.find()
     res.status(200).json({ success: true, data: vets })
 })
 
-// @desc    Get vets info (ALL VETS TYPES)
+// @desc    Get vets info (Only Vet Verified)
 // @route   GET /api/vets
 // @access  Public
 const getAllVets = asyncHandler(async (req, res) => {
+    console.log('ALL VETS')
     const vets = await Vet.find()
     res.status(200).json({ success: true, data: vets })
 })
@@ -28,14 +32,14 @@ const vetsFilter = asyncHandler(async (req, res) => {
     const time = req.body.time
     console.log(
         'VETS FILTER:\n' +
-            selected +
-            '\n' +
-            emergency +
-            '\n' +
-            vet_type +
-            '\n' +
-            time +
-            '\n'
+      selected +
+      '\n' +
+      emergency +
+      '\n' +
+      vet_type +
+      '\n' +
+      time +
+      '\n'
     )
 
     // Ver si se selecciono un servicio en específico (Rayos X, Hospedaje, etc o cualquiera)
@@ -62,6 +66,7 @@ const setVetinfo = asyncHandler(async (req, res) => {
     }
 
     const vet = await Vet.create({
+        user: req.user.id,
         name: req.body.name,
         direction: req.body.direction,
         email: req.body.email,
@@ -75,7 +80,7 @@ const setVetinfo = asyncHandler(async (req, res) => {
         verified: false,
     })
 
-    res.status(200).json({ success: true })
+    res.status(200).json({ success: true})
 })
 
 // @desc    Update vet info
