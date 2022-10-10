@@ -18,12 +18,26 @@
 // import '../styles/index.css'
 // import PropTypes from 'prop-types'
 
-import { Link } from 'react-router-dom'
+/* eslint-disable linebreak-style */
 
-const HeaderComponent = () => {
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import {logout, reset} from '../../features/auth/authSlice'
+
+function HeaderComponent() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const {user} = useSelector((state) => state.auth)
+
+    const onLogout = () => {
+        dispatch(logout())
+        dispatch(reset())
+        navigate('/')
+    }
+
     return (
         <>
-            <nav className="header" data-testid={'header-test'}>
+            <nav className="header">
                 <Link to={'/'}>
                     {' '}
                     <h1 className="logo">
@@ -32,25 +46,34 @@ const HeaderComponent = () => {
                 </Link>
 
                 <ul className="header-right">
-                    <li className="option active btn">
-                        <Link to={'/emergency'}>Emergencia</Link>
-                    </li>
+                    {user ? 
+                    
+                        (<>
+                            <li className="option btn">
+                                <Link to={'/RegisterVet'}>Formulario</Link>
+                            </li>
 
-                    <li className="option btn" data-testid="search">
-                        <Link to={'/search'}>Búsqueda</Link>
-                    </li>
+                            <li className="option btn">
+                                <button onClick={onLogout}>X</button>
+                            </li>
+                        </>) : 
+                        (<> 
+                            <li className="option active btn">
+                                <Link to={'/emergency'}>Emergencia</Link>
+                            </li>
 
-                    <li className="option btn">
-                        <Link to={'/login'}>Iniciar sesión</Link>
-                    </li>
+                            <li className="option btn" data-testid="search">
+                                <Link to={'/search'}>Búsqueda</Link>
+                            </li>
 
-                    <li className="option btn">
-                        <Link to={'/RegisterVet'}>Formulario</Link>
-                    </li>
+                            <li className="option btn">
+                                <Link to={'/login'}>Iniciar sesión</Link>
+                            </li>
 
-                    <li className="option btn">
-                        <Link to={'/faq'}>FAQ</Link>
-                    </li>
+                            <li className="option btn">
+                                <Link to={'/faq'}>FAQ</Link>
+                            </li> 
+                        </>)}                   
                 </ul>
             </nav>
         </>
