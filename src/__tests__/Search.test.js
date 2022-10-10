@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import Search from '../pages/Search'
+import Popup from '../pages/VetPopup'
 
 describe('FAQ component Testings', () => {
     test('Testing Render FAQ', () => {
@@ -17,4 +18,15 @@ describe('FAQ component Testings', () => {
         const displayedVetInfo = screen.getAllByRole('option')
         expect(displayedVetInfo.length).toBeGreaterThan(1)
     })
+
+    test("Testing API's conecction and displaying vets info", async () => {
+        render(<Search />)
+        const card = screen.getAllByRole('VetCont')
+        fireEvent.click(card)
+        render(<Popup />)
+        const info = screen.getAllByRole('vet-footer')
+        expect(info).toBeInTheDocument()
+    } )
 })
+
+
