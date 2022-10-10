@@ -65,9 +65,9 @@ const Register = () => {
 
     const passEqual = (pass) => {
         if (pass === 'match') {
-          return (<p style={style}>match</p>);
+          return (<p data-testid={'password-test'} style={style}>match</p>);
         } else if (pass === 'not match') {
-          return (<p style={style}>not match</p>);
+          return (<p data-testid={'password-test'} style={style}>not match</p>);
         }
       };
 
@@ -90,7 +90,8 @@ const Register = () => {
 
                             <div className="outerContainer2">
                                 <FormLabel>{'Nombre'}</FormLabel>
-                                <Input
+                                <Input 
+                                    data-testid={'name-input-test'}
                                     type='text'
                                     value={name}
                                     name='name'
@@ -103,6 +104,7 @@ const Register = () => {
                             <div className="outerContainer2">
                                 <FormLabel>{'Correo'}</FormLabel>
                                 <Input
+                                    data-testid={'email-input-test'}
                                     type='text'
                                     value={email}
                                     name='email'
@@ -115,6 +117,7 @@ const Register = () => {
                             <div className="outerContainer2">
                                 <FormLabel>{'Contraseña'}</FormLabel>
                                 <Input
+                                    data-testid={'password-input-test'}
                                     type='text'
                                     value={password}
                                     name='password'
@@ -127,6 +130,7 @@ const Register = () => {
                             <div className="outerContainer2">
                                 <FormLabel>{'Confirmar contraseña'}</FormLabel>
                                 <Input
+                                    data-testid={'password-veri-input-test'}
                                     type='text'
                                     value={password2}
                                     name='password2'
