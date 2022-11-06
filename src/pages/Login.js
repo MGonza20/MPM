@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { Heading, Button } from '@chakra-ui/react'
 import '../styles/register.css'
 import { Input, FormLabel } from '@chakra-ui/react'
-import {useSelector, useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {toast} from 'react-toastify'
 import {login, reset} from '../features/auth/authSlice'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
 
 
 
@@ -18,9 +18,9 @@ const Register = () => {
     const { email, password } = formData
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
-    const {user, isError, isSuccess, message} = useSelector((state) => state.auth)
+    const {user, isError, isSuccess, message} = useAppSelector((state) => state.auth)
 
     useEffect(() => {
         if(isError){
