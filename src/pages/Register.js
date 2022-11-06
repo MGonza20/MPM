@@ -138,7 +138,6 @@ const Register = () => {
                                     placeholder={'Ingrese nuevamente su contraseña'}
                                 />
                             </div>
-                            <div>{passEqual(equals)}</div>
 
                             <Button
                                 backgroundColor="#ea9a64"
@@ -163,7 +162,7 @@ const Register = () => {
                             </a>
                         </p>
                         
-
+                        <div>{passEqual(equals)}</div>
                         <div>{messageError}</div>
                     </div>
                     <div className="innerContainer"></div>
