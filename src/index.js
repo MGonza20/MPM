@@ -8,7 +8,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={store()}>
         <ChakraProvider>
             <BrowserRouter data-testid={'index-test'}>
                 <App />

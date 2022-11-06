@@ -6,7 +6,7 @@ const rootReducer = combineReducers({
     auth: authReducer
 })
 
-export const setupStore = preloadedState => {
+export const store = preloadedState => {
     return configureStore({
         reducer: rootReducer,
         preloadedState

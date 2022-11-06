@@ -14,4 +14,13 @@ describe('Register Component Testings', () => {
             </BrowserRouter>)
     })
 
+
+    test('Testing Render get by id', () => {
+        renderWithProviders(
+            <BrowserRouter>
+                <Register />
+            </BrowserRouter>)
+        
+        expect(screen.getByTestId('register-page-test')).toBeInTheDocument()
+    })
 })

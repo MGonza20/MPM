@@ -1,18 +1,18 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { Provider } from 'react-redux'
-import { setupStore } from '../app/store'
+import { store } from '../app/store'
 
 export function renderWithProviders(
   ui,
   {
     preloadedState = {},
-    store = setupStore(preloadedState),
+    storee = store(preloadedState),
     ...renderOptions
   } = {}
 ) {
   function Wrapper({ children }) {
-    return <Provider store={store}>{children}</Provider>
+    return <Provider store={storee}>{children}</Provider>
   }
-  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) }
+  return { storee, ...render(ui, { wrapper: Wrapper, ...renderOptions }) }
 }
