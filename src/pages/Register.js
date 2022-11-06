@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { Heading, Button } from '@chakra-ui/react'
 import '../styles/register.css'
 import { Input, FormLabel } from '@chakra-ui/react'
-import {useSelector, useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {toast} from 'react-toastify'
 import {register, reset} from '../features/auth/authSlice'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
 
 
 const Register = () => {
@@ -19,14 +19,16 @@ const Register = () => {
 
     const { name, email, password, password2 } = formData
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
+    const [messageError, setMessageError] = useState('')
 
-    const {user, isError, isSuccess, message} = useSelector((state) => state.auth)
+    const {user, isError, isSuccess, message} = useAppSelector((state) => state.auth)
     
 
     useEffect(() => {
         if(isError){
             toast.error(message)
+            setMessageError(message)
         }
 
         if(isSuccess || user){
@@ -61,13 +63,10 @@ const Register = () => {
         }
     }
 
-    const style = {color : 'white'}
 
     const passEqual = (pass) => {
-        if (pass === 'match') {
-          return (<p data-testid={'password-test'} style={style}>match</p>);
-        } else if (pass === 'not match') {
-          return (<p data-testid={'password-test'} style={style}>not match</p>);
+        if (pass === 'not match') {
+          return (<div className='errorContainer'><p data-testid={'password-test'} >Las contraseñas no son iguales</p></div>);
         }
       };
 
@@ -139,6 +138,7 @@ const Register = () => {
                                     placeholder={'Ingrese nuevamente su contraseña'}
                                 />
                             </div>
+                            <div>{passEqual(equals)}</div>
 
                             <Button
                                 backgroundColor="#ea9a64"
@@ -162,7 +162,9 @@ const Register = () => {
                                 <b className="highlight">¡Inicie Sesión!</b>
                             </a>
                         </p>
-                        <div>{passEqual(equals)}</div>
+                        
+
+                        <div>{messageError}</div>
                     </div>
                     <div className="innerContainer"></div>
                 </div>

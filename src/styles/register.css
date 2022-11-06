@@ -10,6 +10,14 @@
     --blanco: #fff;
 }
 
+.errorContainer{
+    text-align: center;
+}
+
+.errorText{
+    color: red;
+    font-size: 1.2em;
+}
 
 
 .questionCont {
