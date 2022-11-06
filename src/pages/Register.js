@@ -20,6 +20,7 @@ const Register = () => {
     const { name, email, password, password2 } = formData
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
+    const [messageError, setMessageError] = useState('')
 
     const {user, isError, isSuccess, message} = useAppSelector((state) => state.auth)
     
@@ -27,6 +28,7 @@ const Register = () => {
     useEffect(() => {
         if(isError){
             toast.error(message)
+            setMessageError(message)
         }
 
         if(isSuccess || user){
@@ -48,6 +50,7 @@ const Register = () => {
         e.preventDefault()
 
         if (password !== password2) {
+            toast.error('Las contraseñas no son iguales')
             setEquals('not match')
         } else {
             setEquals('match')
@@ -60,13 +63,10 @@ const Register = () => {
         }
     }
 
-    const style = {color : 'red'}
 
     const passEqual = (pass) => {
-        if (pass === 'match') {
-          return (<p data-testid={'password-test'} style={style}>match</p>);
-        } else if (pass === 'not match') {
-          return (<div className='errorContainer'><p data-testid={'password-test'} className='errorText' ><b>Las contraseñas no son iguales</b></p></div>);
+        if (pass === 'not match') {
+          return (<div className='errorContainer'><p data-testid={'password-test'} >Las contraseñas no son iguales</p></div>);
         }
       };
 
@@ -154,7 +154,6 @@ const Register = () => {
                             >
                                 Aceptar
                             </Button>
-                            <div>{message}</div>
 
                         </form>
                         <p className="questionCont">
@@ -164,6 +163,8 @@ const Register = () => {
                             </a>
                         </p>
                         
+
+                        <div>{messageError}</div>
                     </div>
                     <div className="innerContainer"></div>
                 </div>
