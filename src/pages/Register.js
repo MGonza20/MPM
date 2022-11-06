@@ -48,7 +48,6 @@ const Register = () => {
         e.preventDefault()
 
         if (password !== password2) {
-            toast.error('Las contraseñas no son iguales')
             setEquals('not match')
         } else {
             setEquals('match')
@@ -61,13 +60,13 @@ const Register = () => {
         }
     }
 
-    const style = {color : 'white'}
+    const style = {color : 'red'}
 
     const passEqual = (pass) => {
         if (pass === 'match') {
           return (<p data-testid={'password-test'} style={style}>match</p>);
         } else if (pass === 'not match') {
-          return (<p data-testid={'password-test'} style={style}>not match</p>);
+          return (<div className='errorContainer'><p data-testid={'password-test'} className='errorText' ><b>Las contraseñas no son iguales</b></p></div>);
         }
       };
 
@@ -139,6 +138,7 @@ const Register = () => {
                                     placeholder={'Ingrese nuevamente su contraseña'}
                                 />
                             </div>
+                            <div>{passEqual(equals)}</div>
 
                             <Button
                                 backgroundColor="#ea9a64"
@@ -154,6 +154,7 @@ const Register = () => {
                             >
                                 Aceptar
                             </Button>
+                            <div>{message}</div>
 
                         </form>
                         <p className="questionCont">
@@ -162,7 +163,7 @@ const Register = () => {
                                 <b className="highlight">¡Inicie Sesión!</b>
                             </a>
                         </p>
-                        <div>{passEqual(equals)}</div>
+                        
                     </div>
                     <div className="innerContainer"></div>
                 </div>
