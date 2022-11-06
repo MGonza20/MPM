@@ -15,19 +15,14 @@
  * Javier Alvarez
  #######################################################################################*/
 
-// import '../styles/index.css'
-// import PropTypes from 'prop-types'
-
-/* eslint-disable linebreak-style */
-
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import {logout, reset} from '../../features/auth/authSlice'
+import { logout, reset } from '../../features/auth/authSlice'
 
 function HeaderComponent() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const {user} = useSelector((state) => state.auth)
+    const { user } = useSelector((state) => state.auth)
 
     const onLogout = () => {
         dispatch(logout())
@@ -46,9 +41,8 @@ function HeaderComponent() {
                 </Link>
 
                 <ul className="header-right">
-                    {user ? 
-                    
-                        (<>
+                    {user ? (
+                        <>
                             <li className="option btn">
                                 <Link to={'/RegisterVet'}>Formulario</Link>
                             </li>
@@ -56,8 +50,9 @@ function HeaderComponent() {
                             <li className="option btn">
                                 <button onClick={onLogout}>X</button>
                             </li>
-                        </>) : 
-                        (<> 
+                        </>
+                    ) : (
+                        <>
                             <li className="option active btn">
                                 <Link to={'/emergency'}>Emergencia</Link>
                             </li>
@@ -72,8 +67,9 @@ function HeaderComponent() {
 
                             <li className="option btn">
                                 <Link to={'/faq'}>FAQ</Link>
-                            </li> 
-                        </>)}                   
+                            </li>
+                        </>
+                    )}
                 </ul>
             </nav>
         </>
