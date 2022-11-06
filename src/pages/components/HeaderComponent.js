@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 /**#######################################################################################
  * Universidad del Valle de Guatemala
  * Departamento de Ciencias de la Computación
