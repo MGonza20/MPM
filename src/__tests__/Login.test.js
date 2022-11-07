@@ -5,12 +5,13 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import Login from '../pages/Login'
-import  { Provider } from 'react-redux'
+import { Provider } from 'react-redux'
 // import store from '../app/store'
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from '../features/auth/authSlice'
+import { BrowserRouter } from 'react-router-dom'
 
-function renderWithRedux(renderedComponent){
+function renderWithRedux(renderedComponent) {
     const store = configureStore({
         reducer: {
             auth: authReducer,
@@ -19,18 +20,16 @@ function renderWithRedux(renderedComponent){
     return render(<Provider store={store}>(renderedComponent)</Provider>)
 }
 
-
 /**
  * @jest-enviroment jsdom
  */
 describe('Login component Testings', () => {
-    
     test('Testing Render login', () => {
         renderWithRedux(<Login />)
         // const infoElement = screen.getByTestId('login-test')
         // expect(infoElement).toBeInTheDocument()
     })
-    
+
     // test('Testing Render login', () => {
     //     renderWithRedux(<Login />)
     //     const infoElement = screen.getByTestId('login-test')
@@ -48,4 +47,18 @@ describe('Login component Testings', () => {
     //     const loginElement = screen.getAllByRole('div')
     //     expect(loginElement.length).toBeGreaterThan(1)
     // })
+})
+
+describe('Testing On Submit', () => {
+    test('Testing Button of Form', () => {
+        const onSubmit = jest.fn()
+        // renderWithRedux(<Login />)
+        renderWithProviders(
+            <BrowserRouter>
+                <Login />
+            </BrowserRouter>
+        )
+        fireEvent.submit(screen.getByTestId('onSubmit'))
+        expect(onSubmit).toHaveBeenCalled()
+    })
 })

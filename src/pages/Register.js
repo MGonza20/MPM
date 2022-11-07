@@ -3,10 +3,11 @@ import { Heading, Button } from '@chakra-ui/react'
 import '../styles/register.css'
 import { Input, FormLabel } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
-import {toast} from 'react-toastify'
-import {register, reset} from '../features/auth/authSlice'
+import { toast } from 'react-toastify'
+import { register, reset } from '../features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 
+import passEqual from './components/PassEqual'
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -15,33 +16,33 @@ const Register = () => {
         password: '',
         password2: '',
     })
-    const [equals, setEquals] = useState('') 
+    const [equals, setEquals] = useState('')
 
     const { name, email, password, password2 } = formData
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [messageError, setMessageError] = useState('')
 
-    const {user, isError, isSuccess, message} = useAppSelector((state) => state.auth)
-    
+    const { user, isError, isSuccess, message } = useAppSelector(
+        (state) => state.auth
+    )
 
     useEffect(() => {
-        if(isError){
+        if (isError) {
             toast.error(message)
             setMessageError(message)
         }
 
-        if(isSuccess || user){
+        if (isSuccess || user) {
             navigate('/RegisterVet')
         }
 
         dispatch(reset())
-
     }, [user, isError, isSuccess, message, navigate, dispatch])
 
     const handleChange = (e) => {
         setFormData((prevState) => ({
-            ...prevState, 
+            ...prevState,
             [e.target.name]: e.target.value,
         }))
     }
@@ -63,18 +64,10 @@ const Register = () => {
         }
     }
 
-
-    const passEqual = (pass) => {
-        if (pass === 'not match') {
-          return (<div className='errorContainer'><p data-testid={'password-test'} >Las contraseñas no son iguales</p></div>);
-        }
-      };
-
     const colors = {
         verde: 'rgb(174 213 142)',
         blanco: 'rgb(255, 255, 255)',
     }
-    
 
     return (
         <div data-testid={'register-page-test'}>
@@ -85,15 +78,14 @@ const Register = () => {
                             <Heading className="title">Cree una cuenta</Heading>
                         </div>
 
-                        <form onSubmit={onSubmit}>
-
+                        <form onSubmit={onSubmit} data-testid={'onSubmit'}>
                             <div className="outerContainer2">
                                 <FormLabel>{'Nombre'}</FormLabel>
-                                <Input 
+                                <Input
                                     data-testid={'name-input-test'}
-                                    type='text'
+                                    type="text"
                                     value={name}
-                                    name='name'
+                                    name="name"
                                     onChange={handleChange}
                                     focusBorderColor={colors.verde}
                                     placeholder={'Ingrese su nombre'}
@@ -104,9 +96,9 @@ const Register = () => {
                                 <FormLabel>{'Correo'}</FormLabel>
                                 <Input
                                     data-testid={'email-input-test'}
-                                    type='text'
+                                    type="text"
                                     value={email}
-                                    name='email'
+                                    name="email"
                                     onChange={handleChange}
                                     focusBorderColor={colors.verde}
                                     placeholder={'Ingrese su correo'}
@@ -117,9 +109,9 @@ const Register = () => {
                                 <FormLabel>{'Contraseña'}</FormLabel>
                                 <Input
                                     data-testid={'password-input-test'}
-                                    type='text'
+                                    type="text"
                                     value={password}
-                                    name='password'
+                                    name="password"
                                     onChange={handleChange}
                                     focusBorderColor={colors.verde}
                                     placeholder={'Ingrese su contraseña'}
@@ -130,12 +122,14 @@ const Register = () => {
                                 <FormLabel>{'Confirmar contraseña'}</FormLabel>
                                 <Input
                                     data-testid={'password-veri-input-test'}
-                                    type='text'
+                                    type="text"
                                     value={password2}
-                                    name='password2'
+                                    name="password2"
                                     onChange={handleChange}
                                     focusBorderColor={colors.verde}
-                                    placeholder={'Ingrese nuevamente su contraseña'}
+                                    placeholder={
+                                        'Ingrese nuevamente su contraseña'
+                                    }
                                 />
                             </div>
 
@@ -153,7 +147,6 @@ const Register = () => {
                             >
                                 Aceptar
                             </Button>
-
                         </form>
                         <p className="questionCont">
                             ¿Tiene cuenta?{' '}
@@ -161,7 +154,7 @@ const Register = () => {
                                 <b className="highlight">¡Inicie Sesión!</b>
                             </a>
                         </p>
-                        
+
                         <div>{passEqual(equals)}</div>
                         <div>{messageError}</div>
                     </div>

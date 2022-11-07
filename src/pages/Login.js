@@ -3,11 +3,9 @@ import { Heading, Button } from '@chakra-ui/react'
 import '../styles/register.css'
 import { Input, FormLabel } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
-import {toast} from 'react-toastify'
-import {login, reset} from '../features/auth/authSlice'
+import { toast } from 'react-toastify'
+import { login, reset } from '../features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-
-
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -20,25 +18,25 @@ const Register = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
-    const {user, isError, isSuccess, message} = useAppSelector((state) => state.auth)
+    const { user, isError, isSuccess, message } = useAppSelector(
+        (state) => state.auth
+    )
 
     useEffect(() => {
-        if(isError){
+        if (isError) {
             toast.error(message)
         }
 
-        if(isSuccess || user){
+        if (isSuccess || user) {
             navigate('/RegisterVet')
         }
 
         dispatch(reset())
-
     }, [user, isError, isSuccess, message, navigate, dispatch])
-
 
     const handleChange = (e) => {
         setFormData((prevState) => ({
-            ...prevState, 
+            ...prevState,
             [e.target.name]: e.target.value,
         }))
     }
@@ -55,7 +53,6 @@ const Register = () => {
     const colors = {
         verde: 'rgb(174 213 142)',
     }
-    
 
     return (
         <div data-testid={'login-test'}>
@@ -66,14 +63,13 @@ const Register = () => {
                             <Heading className="title">Inicie Sesión</Heading>
                         </div>
 
-                        <form onSubmit={onSubmit}>
-
+                        <form onSubmit={onSubmit} data-testid={'onSubmit'}>
                             <div className="outerContainer2">
                                 <FormLabel>{'Correo'}</FormLabel>
                                 <Input
-                                    type='text'
+                                    type="text"
                                     value={email}
-                                    name='email'
+                                    name="email"
                                     onChange={handleChange}
                                     focusBorderColor={colors.verde}
                                     placeholder={'Ingrese su correo'}
@@ -83,9 +79,9 @@ const Register = () => {
                             <div className="outerContainer2">
                                 <FormLabel>{'Contraseña'}</FormLabel>
                                 <Input
-                                    type='text'
+                                    type="text"
                                     value={password}
-                                    name='password'
+                                    name="password"
                                     onChange={handleChange}
                                     focusBorderColor={colors.verde}
                                     placeholder={'Ingrese su contraseña'}
@@ -106,7 +102,6 @@ const Register = () => {
                             >
                                 Aceptar
                             </Button>
-
                         </form>
                         <p className="questionCont">
                             ¿No tiene cuenta?{' '}
