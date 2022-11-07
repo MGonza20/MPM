@@ -71,7 +71,11 @@
         ],
         "transformIgnorePatterns": [
             "node_modules/(?!axios)",
-            "node_modules/react-leaflet"
+            "node_modules/react-leaflet",
+            "!src/index.js"
         ]
+    },
+    "devDependencies": {
+        "axios-mock-adapter": "^1.21.2"
     }
 }
