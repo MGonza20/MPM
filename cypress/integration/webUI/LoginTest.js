@@ -46,11 +46,11 @@ describe('My Pet & Me - Login Test', function () {
 
         // -----------------------------------------------------------------------------------
         // Como ya tenemos una veterinaria ya registrada entonces vamos a ir de una vez ------
-        cy.get('#field-\\:r0\\:').type('Veterinaria Cypress 2') // Nombre
+        cy.get('#field-\\:r0\\:').type('Veterinaria Cypress True') // Nombre
         cy.get('#field-\\:r1\\:').type('Guatemala') // Ciudad
         cy.get('#field-\\:r2\\:').type('15') // Zona
         cy.get('#field-\\:r3\\:').type('Cayala') // Dirección
-        cy.get('#field-\\:r4\\:').type('vetcypress2@gmail.com') // Correo
+        cy.get('#field-\\:r4\\:').type('vetcypressTrue@gmail.com') // Correo
 
         // Servicios ofrecidos : [data-testid="handle-add-vet-test"] > :nth-child(6)
         // Vacunacion : [data-testid="vacunacion-test"] > .chakra-checkbox__label
@@ -88,6 +88,10 @@ describe('My Pet & Me - Login Test', function () {
             '[data-testid="operacion-test"] > .chakra-checkbox__label'
         ).click()
 
+        cy.get(
+            '[src="https://b.tile.openstreetmap.org/13/2036/3758.png"]'
+        ).click()
+
         cy.get('#field-\\:r5\\:').type('9999-0001') // Telefono
 
         // 1) Si, 2) No
@@ -112,6 +116,8 @@ describe('My Pet & Me - Login Test', function () {
 
         // Boton de enviar formulario
         // cy.get('.chakra-button').click() // Como es valido entonces se entrará a la cuenta :)
+
+        cy.wait(2000)
         // -----------------------------------------------------------------------------------
     })
 })
