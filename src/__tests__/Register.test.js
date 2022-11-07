@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, getByText, screen } from '@testing-library/react'
+import { fireEvent, screen } from '@testing-library/react'
 import { renderWithProviders } from '../utils/test-utils'
 import Register from '../pages/Register'
 import { BrowserRouter } from 'react-router-dom'

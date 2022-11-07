@@ -2,23 +2,13 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/react-in-jsx-scope */
-import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
+import { fireEvent, getByText, screen } from '@testing-library/react'
 import Login from '../pages/Login'
-import  { Provider } from 'react-redux'
+import { renderWithProviders } from '../utils/test-utils'
+import { BrowserRouter } from 'react-router-dom'
+
 // import store from '../app/store'
-import { configureStore } from '@reduxjs/toolkit'
-import authReducer from '../features/auth/authSlice'
-
-function renderWithRedux(renderedComponent){
-    const store = configureStore({
-        reducer: {
-            auth: authReducer,
-        },
-    })
-    return render(<Provider store={store}>(renderedComponent)</Provider>)
-}
-
 
 /**
  * @jest-enviroment jsdom
@@ -26,9 +16,9 @@ function renderWithRedux(renderedComponent){
 describe('Login component Testings', () => {
     
     test('Testing Render login', () => {
-        renderWithRedux(<Login />)
-        // const infoElement = screen.getByTestId('login-test')
-        // expect(infoElement).toBeInTheDocument()
+        renderWithProviders(<BrowserRouter><Login /></BrowserRouter>)
+        const infoElement = screen.getByTestId('login-test')
+        expect(infoElement).toBeInTheDocument()
     })
     
     // test('Testing Render login', () => {
