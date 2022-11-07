@@ -21,30 +21,11 @@ describe('Login component Testings', () => {
         const infoElement = screen.getByTestId('login-test')
         expect(infoElement).toBeInTheDocument()
     })
-
-    // test('Testing Render login', () => {
-    //     renderWithRedux(<Login />)
-    //     const infoElement = screen.getByTestId('login-test')
-    //     expect(infoElement).toBeInTheDocument()
-    // })
-
-    // test('Testing if there is a Form', () => {
-    //     render(<Login />)
-    //     const loginElement = screen.getAllByRole('form')
-    //     expect(loginElement.length).toBeGreaterThanOrEqual(1)
-    // })
-
-    // test('Testing good amount of divs', () => {
-    //     render(<Login />)
-    //     const loginElement = screen.getAllByRole('div')
-    //     expect(loginElement.length).toBeGreaterThan(1)
-    // })
 })
 
 describe('Testing On Submit', () => {
     test('Testing Button of Form', () => {
         const onSubmit = jest.fn()
-        // renderWithRedux(<Login />)
         renderWithProviders(
             <BrowserRouter>
                 <Login />
