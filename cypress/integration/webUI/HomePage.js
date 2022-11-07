@@ -9,7 +9,7 @@ describe("Renders the home page", () => {
         cy.visit("/"); 
         cy.get(':nth-child(4) > a').click();
         cy.get(':nth-child(4) > a').click();
-        cy.get("h1").should("contain", "1. ¿Cómo debo usar la página en caso de una emergencia?");
+        cy.findByText("Preguntas Frecuentes").should("exist");
     });
 
     it("Renders the search page, goes to a vet, verifies popup, back to homepage", () => {
