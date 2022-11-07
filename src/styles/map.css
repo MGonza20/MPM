@@ -1,14 +1,15 @@
 .leaflet-container {
   width: 100%;
-  height: 100%;
-  min-height: 85vh;
+  min-height: 1020px;
+  display: block;
+  position: relative;
+  touch-action: none;
+  overflow: hidden;
 }
 
 .map-container {
   height: 100%;
   width: 100%;
-  display: flex;
-  align-items: center;
 }
 
 .map-container-ext {
