@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import Search from '../pages/Search'
 
@@ -17,4 +17,16 @@ describe('FAQ component Testings', () => {
         const displayedVetInfo = screen.getAllByRole('option')
         expect(displayedVetInfo.length).toBeGreaterThan(1)
     })
+
+    test("Testing card render", async () => {
+        render(<Search />)
+        const cardCont = screen.getAllByTestId('render-card')
+        expect(cardCont).toBeInTheDocument()
+    })
+
+    test("Testing search button use", async () => {
+        render(<Search />)
+        const displayedVetInfo = screen.getAllByTestId('botoncito')
+        fireEvent.click(displayedVetInfo)
+    } )  
 })

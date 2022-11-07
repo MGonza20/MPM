@@ -13,7 +13,8 @@ export const FilterForm = () => {
   //<input defaultValue="test" {...register("example")} />
 
   const onSubmit = (data) => {
-    console.log(data)
+    console.log(data)//funcion para los filtro
+    //llamada del backend y actualizacion con react
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
