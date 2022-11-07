@@ -315,6 +315,7 @@ const RegisterVet = () => {
                                 <br></br>
 
                                 <MapContainer
+                                    className="map-container"
                                     center={[14.6050635, -90.4893286]}
                                     zoom={13}
                                 >

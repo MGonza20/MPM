@@ -19,7 +19,14 @@ describe('My Pet & Me - Login Test', function () {
 
         cy.get('.chakra-button').click()
 
-        cy.wait(5000) // Solamente para ver el error que puede ocurrir
+        cy.wait(2000) // Solamente para ver el error que puede ocurrir
+
+        cy.get('.Toastify__toast-body > :nth-child(2)').should(
+            'contain',
+            'Datos incorrectos'
+        )
+
+        cy.wait(3000) // Solamente para ver el error que puede ocurrir
     })
 
     it('Test of Existing User', function () {
@@ -60,9 +67,6 @@ describe('My Pet & Me - Login Test', function () {
         cy.get(
             '[data-testid="hematologias-test"] > .chakra-checkbox__label'
         ).click()
-
-        // ! --------------------------------------------------------------------------
-        // ! Ejjj....................................................................--
         // Hospedaje : [data-testid="hospedaje-test"] > .chakra-checkbox__label
         // cy.get(
         //     '[data-testid="hospedaje-test"] > .chakra-checkbox__label'
@@ -80,10 +84,9 @@ describe('My Pet & Me - Login Test', function () {
         // '[data-testid="castraciones-test"] > .chakra-checkbox__label'
         // ).click()
         // Operacion : [data-testid="operacion-test"] > .chakra-checkbox__label
-        // cy.get(
-        // '[data-testid="operacion-test"] > .chakra-checkbox__label'
-        // ).click()
-        // ! --------------------------------------------------------------------------
+        cy.get(
+            '[data-testid="operacion-test"] > .chakra-checkbox__label'
+        ).click()
 
         cy.get('#field-\\:r5\\:').type('9999-0001') // Telefono
 
