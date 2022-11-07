@@ -7,8 +7,6 @@ import { toast } from 'react-toastify'
 import { register, reset } from '../features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 
-import passEqual from './components/PassEqual'
-
 const Register = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -16,12 +14,10 @@ const Register = () => {
         password: '',
         password2: '',
     })
-    const [equals, setEquals] = useState('')
 
     const { name, email, password, password2 } = formData
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const [messageError, setMessageError] = useState('')
 
     const { user, isError, isSuccess, message } = useAppSelector(
         (state) => state.auth
@@ -30,7 +26,6 @@ const Register = () => {
     useEffect(() => {
         if (isError) {
             toast.error(message)
-            setMessageError(message)
         }
 
         if (isSuccess || user) {
@@ -52,9 +47,7 @@ const Register = () => {
 
         if (password !== password2) {
             toast.error('Las contraseñas no son iguales')
-            setEquals('not match')
         } else {
-            setEquals('match')
             const userData = {
                 name,
                 email,
@@ -134,6 +127,7 @@ const Register = () => {
                             </div>
 
                             <Button
+                                data-testid="button-accept-test"
                                 backgroundColor="#ea9a64"
                                 _hover="rgb(174 213 142)"
                                 _active={{
@@ -154,9 +148,6 @@ const Register = () => {
                                 <b className="highlight">¡Inicie Sesión!</b>
                             </a>
                         </p>
-
-                        <div>{passEqual(equals)}</div>
-                        <div>{messageError}</div>
                     </div>
                     <div className="innerContainer"></div>
                 </div>
