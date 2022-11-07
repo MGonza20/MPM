@@ -18,20 +18,16 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../../features/auth/authSlice'
 
+import onLogout from '../functions/OnLogout'
+
 function HeaderComponent() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { user } = useSelector((state) => state.auth)
 
-    const onLogout = () => {
-        dispatch(logout())
-        dispatch(reset())
-        navigate('/')
-    }
-
     return (
         <>
-            <nav className="header">
+            <nav className="header" data-testid={'header-test'}>
                 <Link to={'/'}>
                     {' '}
                     <h1 className="logo">
@@ -47,7 +43,17 @@ function HeaderComponent() {
                             </li>
 
                             <li className="option btn">
-                                <button onClick={onLogout}>X</button>
+                                <button
+                                    onClick={onLogout(
+                                        dispatch,
+                                        logout,
+                                        reset,
+                                        navigate
+                                    )}
+                                    data-testid="onLogout"
+                                >
+                                    X
+                                </button>
                             </li>
                         </>
                     ) : (

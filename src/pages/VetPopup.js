@@ -25,7 +25,12 @@ import { Divider } from '@chakra-ui/react'
 const VetPopup = ({ vet, regretOriginal }) => {
     return (
         <div data-testid={'vet-popup-react'}>
-            <button onClick={() => regretOriginal(false)}>REGRESAR</button>
+            <button
+                data-testid="regretOriginal"
+                onClick={() => regretOriginal(false)}
+            >
+                REGRESAR
+            </button>
             <div className="body-a">
                 <div className="vet-container">
                     <Avatar

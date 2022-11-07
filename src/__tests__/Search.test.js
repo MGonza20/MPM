@@ -19,14 +19,12 @@ describe('FAQ component Testings', () => {
         expect(displayedVetInfo.length).toBeGreaterThan(1)
     })
 
-    test("Testing API's conecction and displaying vets info", async () => {
+    test('Testing APIs conecction and displaying vets info', async () => {
         render(<Search />)
         const card = screen.getAllByRole('VetCont')
         fireEvent.click(card)
         render(<Popup />)
         const info = screen.getAllByRole('vet-footer')
         expect(info).toBeInTheDocument()
-    } )
+    })
 })
-
-

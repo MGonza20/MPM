@@ -67,7 +67,9 @@
             "!src/features/auth/authSlice.js",
             "!src/app/store.js",
             "!src/App.js",
-            "!src/app/store.js"
+            "!src/app/store.js",
+            "!src/features/auth/authContext.js",
+            "!src/pages/functions/*.{js,jsx}"
         ],
         "transformIgnorePatterns": [
             "node_modules/(?!axios)",
