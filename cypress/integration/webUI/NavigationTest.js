@@ -32,7 +32,8 @@ describe("Renders the project, verifies you can navigate", () => {
         cy.wait(100);
         cy.get('b').click();
         cy.get("h2").should("contain", "My Pet & Me");
-        
+        cy.get('.active > a').click();
+
     });
 
     
