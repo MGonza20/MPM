@@ -72,7 +72,7 @@ function Search() {
             <div className="titleContainer">
               <Heading className="title">Filtros</Heading>
             </div>
-            <FilterForm />
+            <FilterForm posts={posts} setPosts={setPosts} />
           </div>
         </div>
         <div className="SearchOuterContainer3 container">

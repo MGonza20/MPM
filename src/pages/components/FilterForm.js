@@ -2,7 +2,7 @@ import { Select, Button } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-export const FilterForm = () => {
+export const FilterForm = ({ posts, setPosts }) => {
   const {
     register,
     handleSubmit,
@@ -11,8 +11,18 @@ export const FilterForm = () => {
   } = useForm()
 
   const onSubmit = (data) => {
-    console.log(data)
-    //llamada del backend y actualizacion con react
+    const emergency = data.emerg === 'true' ? true : false
+    const kind = data.kind
+    const service = data.services
+    // const theTime = data.the_time
+
+    const theVets = posts.filter(
+      (vet) =>
+        vet.emergency === emergency &&
+        vet.services.includes(service) &&
+        vet.kind === kind
+    )
+    console.log(theVets)
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -49,14 +59,15 @@ export const FilterForm = () => {
         <label>Servicios</label>
         <Select focusBorderColor={'rgb(174 213 142)'} {...register('services')}>
           <option value="">{'Cualquiera'}</option>
-          <option value="Rayos X">{'Rayos X'}</option>
-          <option value="Hospedaje">{'Hospedaje'}</option>
-          <option value="Groominge">{'Groominge'}</option>
-          <option value="Vacunacion">{'Vacunacion'}</option>
-          <option value="Desparacitacion">{'Desparacitacion'}</option>
-          <option value="Castraciones">{'Castraciones'}</option>
-          <option value="Operacion">{'Operacion'}</option>
-          <option value="Emergencias">{'Emergencias'}</option>
+          <option value="rayos_x">{'Rayos X'}</option>
+          <option value="hospedaje">{'Hospedaje'}</option>
+          <option value="groominge">{'Groominge'}</option>
+          <option value="vacunacion">{'Vacunacion'}</option>
+          <option value="desparacitacion">{'Desparacitacion'}</option>
+          <option value="castraciones">{'Castraciones'}</option>
+          <option value="operacion">{'Operacion'}</option>
+          <option value="emergencias">{'Emergencias'}</option>
+          <option value="examenes_corporales">{'Examenes Corporales'}</option>
         </Select>
       </div>
       <Button color="white" background={'orange'} type="submit">
