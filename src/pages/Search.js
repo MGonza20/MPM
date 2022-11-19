@@ -6,7 +6,6 @@ import '../styles/search.css'
 import { FilterForm } from './components/FilterForm'
 //import { vetsFilter } from '../../backend/controllers/vetController'
 
-
 import {
   Heading,
   Button,
@@ -60,7 +59,10 @@ function Search() {
     }
   }
 
-
+  const filterVet = () => {
+    const theVets = posts.filter((vet) => vet.name.includes(value))
+    setPosts(theVets)
+  }
 
   const SeeSearch = () => {
     return (
@@ -108,7 +110,7 @@ function Search() {
             {currentPosts !== null &&
               currentPosts.map((vet) => {
                 return (
-                  <div key={vet['id']} data-testid = "render-card">
+                  <div key={vet['id']} data-testid="render-card">
                     <CardComponent
                       vet={vet}
                       image="https://pbs.twimg.com/media/EWH0kEZWsAAWwvI.jpg"
@@ -141,10 +143,10 @@ function Search() {
               onChange={handleChange}
               focusBorderColor="rgb(174 213 142)"
               placeholder="Ingrese su búsqueda"
-              data-testid = "barrita"
+              data-testid="barrita"
             />
             <Button
-              data-testid = "botoncito"
+              data-testid="botoncito"
               className="buttonS"
               backgroundColor="#ea9a64"
               _hover="rgb(174 213 142)"
@@ -154,7 +156,7 @@ function Search() {
               }}
               color="#fff"
               grid-column="8"
-      
+              onClick={filterVet}
             >
               {' '}
               &#x1F50D;{' '}
