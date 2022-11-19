@@ -9,7 +9,7 @@ const Vet = require('../models/vetModel')
 // @access  Public
 const getVets = asyncHandler(async (req, res) => {
     console.log('VETS')
-    const vets = await Vet.find()
+    const vets = await Vet.find({ verified: true })
     res.status(200).json({ success: true, data: vets })
 })
 
@@ -62,11 +62,11 @@ const setVetinfo = asyncHandler(async (req, res) => {
     console.log(req.body.name)
     if (!req.body.name) {
         res.status(400)
-        throw new Error('Please add a text field')
+        throw new Error('Añada los campos necesarios')
     }
 
     const vet = await Vet.create({
-        user: req.user.id,
+        // user: req.user.id,
         name: req.body.name,
         direction: req.body.direction,
         email: req.body.email,
@@ -77,7 +77,7 @@ const setVetinfo = asyncHandler(async (req, res) => {
         vet_type: req.body.vet_type,
         open_time: req.body.open_time,
         close_time: req.body.close_time,
-        verified: false,
+        verified: true,
     })
 
     res.status(200).json({ success: true})
@@ -91,7 +91,7 @@ const updateVetinfo = asyncHandler(async (req, res) => {
 
     if (!vet) {
         res.status(400)
-        throw new Error('Vet not found')
+        throw new Error('No se encontró al veterinario')
     }
 
     const updatedVet = await Vet.findByIdAndUpdate(req.params.id, req.body, {
@@ -109,7 +109,7 @@ const deleteVetinfo = asyncHandler(async (req, res) => {
 
     if (!vet) {
         res.status(400)
-        throw new Error('Vet not found')
+        throw new Error('No se encontró al veterinario')
     }
 
     await vet.remove()

@@ -2,15 +2,19 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './styles/index.css'
 import App from './App'
+import { store } from './app/store'
+import { Provider } from 'react-redux'
 import { ChakraProvider } from '@chakra-ui/react'
 import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.render(
-    <ChakraProvider>
-        <BrowserRouter data-testid={'index-test'}>
-            <App />
-        </BrowserRouter>
-    </ChakraProvider>,
+    <Provider store={store}>
+        <ChakraProvider>
+            <BrowserRouter data-testid={'index-test'}>
+                <App />
+            </BrowserRouter>
+        </ChakraProvider>
+    </Provider>,
     document.getElementById('root')
 )
 
