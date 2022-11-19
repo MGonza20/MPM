@@ -33,6 +33,7 @@ const RegisterVet = () => {
     const [dicServices, setDicServices] = useState({})
     const [telefono, setTelefono] = useState('')
     const [emergencia, setEmergencia] = useState('')
+    const [kindVet, setKindVet] = useState('')
     const [apertura, setApertura] = useState('08:00')
     const [cierre, setCierre] = useState('20:00')
     const [position, setPosition] = useState(null)
@@ -48,6 +49,7 @@ const RegisterVet = () => {
                 correo: correo,
                 telefono: telefono,
                 emergencia: emergencia,
+                kind: kindVet,
                 apertura: apertura,
                 cierre: cierre,
             },
@@ -290,10 +292,9 @@ const RegisterVet = () => {
                                     <FormLabel>Tipo de veterinaria</FormLabel>
                                     <Select
                                         focusBorderColor={'rgb(174 213 142)'}
+                                        onChange={(event) => setKindVet(event.target.value)}
+                                        value={kindVet}
                                     >
-                                        <option value="Nada">
-                                            {'Cualquiera'}
-                                        </option>
                                         <option value="Normal">
                                             {'Normal'}
                                         </option>
@@ -327,7 +328,7 @@ const RegisterVet = () => {
                                         data-testid={'cierre-test'}
                                         onChange={
                                             (event) =>
-                                                setCierre(event.target.value) // ! ... Hasta acá
+                                                setCierre(event.target.value)
                                         }
                                         title="Hora de cierre"
                                         size="md"

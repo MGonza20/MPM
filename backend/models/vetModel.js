@@ -30,6 +30,9 @@ const vetSchema = mongoose.Schema({
   emergency: {
     type: Boolean,
   },
+  kind:{
+    type: String,
+  },
   open_time: {
     type: String,
   },
