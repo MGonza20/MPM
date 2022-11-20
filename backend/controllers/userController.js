@@ -118,7 +118,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
     await user.remove()
 
-    res.status(200).json({ id: req.params.id })
+    res.status(200).json({ messsge: 'Usuario borrado' })
 })
 
 module.exports = {
