@@ -3,7 +3,7 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - github-actions
+    - github-actions 
 
 jobs:
   deply:
