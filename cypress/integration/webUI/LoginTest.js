@@ -5,11 +5,11 @@ describe('My Pet & Me - Login Test', function () {
     it('Test of Invalid User', function () {
         cy.visit('http://localhost:3000/')
 
-        cy.wait(1000)
+        
 
         cy.get(':nth-child(3) > a').click()
 
-        cy.wait(1000)
+        
 
         // Probar cuenta invalida
         cy.get(':nth-child(1) > .chakra-input').type(
@@ -19,24 +19,24 @@ describe('My Pet & Me - Login Test', function () {
 
         cy.get('.chakra-button').click()
 
-        cy.wait(2000) // Solamente para ver el error que puede ocurrir
+        cy.wait(500) // Solamente para ver el error que puede ocurrir
 
         cy.get('.Toastify__toast-body > :nth-child(2)').should(
             'contain',
             'Datos incorrectos'
         )
 
-        cy.wait(3000) // Solamente para ver el error que puede ocurrir
+        cy.wait(500) // Solamente para ver el error que puede ocurrir
     })
 
     it('Test of Existing User', function () {
         cy.visit('http://localhost:3000/')
 
-        cy.wait(1000)
+        
 
         cy.get(':nth-child(3) > a').click()
 
-        cy.wait(1000)
+        
 
         // Ingresar a una cuenta ya existente
         cy.get(':nth-child(1) > .chakra-input').type('crisVet22@gmail.com')
@@ -117,7 +117,7 @@ describe('My Pet & Me - Login Test', function () {
         // Boton de enviar formulario
         // cy.get('.chakra-button').click() // Como es valido entonces se entrará a la cuenta :)
 
-        cy.wait(2000)
+        
         // -----------------------------------------------------------------------------------
     })
 })
