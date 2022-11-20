@@ -15,6 +15,9 @@ module.exports = defineConfig({
     ],
   },
 
+  viewportHeight: 1080,
+  viewportWidth: 1920,
+
   component: {
     devServer: {
       framework: "create-react-app",
