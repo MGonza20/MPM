@@ -3,7 +3,7 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - filtro-refresh 
+      - github-actions
 
 jobs:
   deply:
@@ -17,7 +17,5 @@ jobs:
           node-version: '14'
       - name: Install dependencies 
         run: npm install
-      - name: App build
-        run: npm start
-      - name: Run database
-        run: npm run db
+      - name: App start
+        run: npm start & npx wait-on http://localhost:3000
