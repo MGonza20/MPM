@@ -22,6 +22,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
-          start: npm run start & npm run db 
+          start: npm install & npm run start & npm run db 
           
 
