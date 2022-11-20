@@ -87,9 +87,44 @@ const generateToken = (id) => {
     })
 }
 
+// @desc    Update user
+// @route   PUT /api/users/:id
+// @access  Private
+const updateUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id)
+
+    if (!user) {
+        res.status(400)
+        throw new Error('No se encontró al usuario')
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+    })
+
+    res.status(200).json(updatedUser)
+})
+
+// @desc    Delete user
+// @route   DELETE /api/users:id
+// @access  Private
+const deleteUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id)
+
+    if (!user) {
+        res.status(400)
+        throw new Error('No se encontró al usuario')
+    }
+
+    await user.remove()
+
+    res.status(200).json({ id: req.params.id })
+})
 
 module.exports = {
     registerUser,
     loginUser,
     getMe,
+    updateUser,
+    deleteUser
 }

@@ -7,7 +7,6 @@ const {
   updateVetinfo,
   deleteVetinfo,
 } = require('../controllers/vetController')
-// const { protect } = require('../middleware/authMiddleware')
 
 router.get('/', getVets)
 router.post('/', setVetinfo)
