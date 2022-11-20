@@ -18,6 +18,4 @@ jobs:
       - name: Install dependencies 
         run: npm install
       - name: App build
-        run: npm start
-      - name: Run database
-        run: npm run db
+        run: npm run build
