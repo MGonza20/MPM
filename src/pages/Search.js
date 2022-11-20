@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import CardComponent from './components/CardComponent'
 import Pagination from './components/Pagination'
 import VetPopup from './VetPopup'
 import '../styles/search.css'
 import { FilterForm } from './components/FilterForm'
+//import { vetsFilter } from '../../backend/controllers/vetController'
 
 import {
   Heading,
@@ -22,6 +23,7 @@ import {
 import FetchVets from './functions/FetchVets'
 
 function Search() {
+  const [defaultPosts, setDefaultPosts] = useState(null)
   const [posts, setPosts] = useState(null)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [selectedVet, setSelectedVet] = useState({})
@@ -34,6 +36,7 @@ function Search() {
 
   useEffect(() => {
     FetchVets(setPosts)
+    FetchVets(setDefaultPosts)
   }, [])
 
   const idxOfLastPost = currentPage * postsPerPage
@@ -58,7 +61,10 @@ function Search() {
     }
   }
 
-
+  const filterVet = () => {
+    const theVets = posts.filter((vet) => vet.name.includes(value))
+    setPosts(theVets)
+  }
 
   const SeeSearch = () => {
     return (
@@ -68,7 +74,7 @@ function Search() {
             <div className="titleContainer">
               <Heading className="title">Filtros</Heading>
             </div>
-            <FilterForm />
+            <FilterForm posts={defaultPosts} setPosts={setPosts} />
           </div>
         </div>
         <div className="SearchOuterContainer3 container">
@@ -106,7 +112,7 @@ function Search() {
             {currentPosts !== null &&
               currentPosts.map((vet) => {
                 return (
-                  <div key={vet['id']}>
+                  <div key={vet['id']} data-testid="render-card">
                     <CardComponent
                       vet={vet}
                       image="https://pbs.twimg.com/media/EWH0kEZWsAAWwvI.jpg"
@@ -139,8 +145,10 @@ function Search() {
               onChange={handleChange}
               focusBorderColor="rgb(174 213 142)"
               placeholder="Ingrese su búsqueda"
+              data-testid="barrita"
             />
             <Button
+              data-testid="botoncito"
               className="buttonS"
               backgroundColor="#ea9a64"
               _hover="rgb(174 213 142)"
@@ -150,7 +158,7 @@ function Search() {
               }}
               color="#fff"
               grid-column="8"
-              onClick={() => alert('HOLA :)')}
+              onClick={filterVet}
             >
               {' '}
               &#x1F50D;{' '}

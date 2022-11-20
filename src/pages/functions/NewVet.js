@@ -36,6 +36,7 @@ const NewVet = (theNewVet, dicServices, position) => {
             long: position.lng,
             phone: theNewVet.telefono,
             emergency: theNewVet.emergencia,
+            kind: theNewVet.kind,
             open_time: theNewVet.apertura,
             close_time: theNewVet.cierre,
         }),
