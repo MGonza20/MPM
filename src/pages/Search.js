@@ -23,6 +23,7 @@ import {
 import FetchVets from './functions/FetchVets'
 
 function Search() {
+  const [defaultPosts, setDefaultPosts] = useState(null)
   const [posts, setPosts] = useState(null)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [selectedVet, setSelectedVet] = useState({})
@@ -35,6 +36,7 @@ function Search() {
 
   useEffect(() => {
     FetchVets(setPosts)
+    FetchVets(setDefaultPosts)
   }, [])
 
   const idxOfLastPost = currentPage * postsPerPage
@@ -72,7 +74,7 @@ function Search() {
             <div className="titleContainer">
               <Heading className="title">Filtros</Heading>
             </div>
-            <FilterForm posts={posts} setPosts={setPosts} />
+            <FilterForm posts={defaultPosts} setPosts={setPosts} />
           </div>
         </div>
         <div className="SearchOuterContainer3 container">
