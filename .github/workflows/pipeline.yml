@@ -20,4 +20,4 @@ jobs:
       - name: App build
         run: npm start
       - name: Run database
-        run: npm run db 
+        run: npm run db
