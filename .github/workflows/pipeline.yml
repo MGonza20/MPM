@@ -17,5 +17,5 @@ jobs:
           node-version: '14'
       - name: Install dependencies 
         run: npm install
-      - name: App build
-        run: npm run build
+      - name: App start
+        run: npm start & npx wait-on http://localhost:3000
