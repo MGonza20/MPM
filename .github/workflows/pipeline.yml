@@ -19,3 +19,5 @@ jobs:
         run: npm install
       - name: App start
         run: npm start & npx wait-on http://localhost:3000
+      - name: Integration tests
+        run: npm run test-cypress
