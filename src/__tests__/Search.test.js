@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import Search from '../pages/Search'
+import Popup from '../pages/VetPopup'
 
 describe('FAQ component Testings', () => {
     test('Testing Render FAQ', () => {
@@ -18,15 +19,12 @@ describe('FAQ component Testings', () => {
         expect(displayedVetInfo.length).toBeGreaterThan(1)
     })
 
-    test("Testing card render", async () => {
+    test('Testing APIs conecction and displaying vets info', async () => {
         render(<Search />)
-        const cardCont = screen.getAllByTestId('render-card')
-        expect(cardCont).toBeInTheDocument()
+        const card = screen.getAllByRole('VetCont')
+        fireEvent.click(card)
+        render(<Popup />)
+        const info = screen.getAllByRole('vet-footer')
+        expect(info).toBeInTheDocument()
     })
-
-    test("Testing search button use", async () => {
-        render(<Search />)
-        const displayedVetInfo = screen.getAllByTestId('botoncito')
-        fireEvent.click(displayedVetInfo)
-    } )  
 })

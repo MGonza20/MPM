@@ -97,7 +97,7 @@ describe('New Vet Function Testings', () => {
 
     // test('Testing Creation of New Vet', async () => {
     //     const newVet = {
-    //         nombre: 'Prueba Real 4',
+    //         nombre: 'Prueba Real 01',
     //         ciudad: 'Prueba Real',
     //         zona: '15',
     //         direccion: 'Prueba Real',

@@ -1,76 +1,91 @@
 {
-    "name": "my-app",
-    "version": "0.1.0",
-    "private": true,
-    "dependencies": {
-        "@chakra-ui/react": "^2.3.5",
-        "@emotion/react": "^11.10.4",
-        "@emotion/styled": "^11.10.4",
-        "@reduxjs/toolkit": "^1.8.6",
-        "@testing-library/cypress": "^8.0.3",
-        "@testing-library/jest-dom": "^5.16.5",
-        "@testing-library/react": "^13.4.0",
-        "@testing-library/user-event": "^13.5.0",
-        "axios": "^1.1.2",
-        "bcryptjs": "^2.4.3",
-        "colors": "^1.4.0",
-        "cors": "^2.8.5",
-        "express-async-handler": "^1.2.0",
-        "framer-motion": "^7.5.3",
-        "jsonwebtoken": "^8.5.1",
-        "leaflet": "^1.9.2",
-        "mongoose": "^6.6.5",
-        "nodemon": "^2.0.20",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-hook-form": "^7.38.0",
-        "react-leaflet": "^4.1.0",
-        "react-redux": "^8.0.4",
-        "react-router-dom": "^6.4.2",
-        "react-scripts": "^5.0.1",
-        "react-toastify": "^9.0.8",
-        "web-vitals": "^2.1.4"
-    },
-    "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "test-cypress": "cypress open",
-        "test-cypress-headless": "cypress run",
-        "eject": "react-scripts eject",
-        "db": "nodemon backend/server.js"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "jest": {
-        "collectCoverageFrom": [
-            "src/**/*.{js,jsx}",
-            "!src/index.js",
-            "!src/pages/components/AddVet.js",
-            "!src/pages/components/LocateMarker.js",
-            "!src/pages/components/LocationMarker.js",
-            "!src/pages/components/SeeVetInfo.js",
-            "!src/pages/functions/FetchVets.js"
-        ]
-    },
-    "devDependencies": {
-        "prettier": "^2.7.1",
-        "cypress": "^10.11.0"
-    }
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@chakra-ui/react": "^2.3.5",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@reduxjs/toolkit": "^1.8.6",
+    "@testing-library/cypress": "^8.0.3",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.1.2",
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "express-async-handler": "^1.2.0",
+    "framer-motion": "^7.5.3",
+    "jsonwebtoken": "^8.5.1",
+    "leaflet": "^1.9.2",
+    "mongoose": "^6.6.5",
+    "nodemon": "^2.0.20",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.38.0",
+    "react-leaflet": "^4.1.0",
+    "react-redux": "^8.0.4",
+    "react-router-dom": "^6.4.2",
+    "react-scripts": "^5.0.1",
+    "react-toastify": "^9.0.8",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "test-cypress": "cypress open",
+    "test-cypress-headless": "cypress run",
+    "eject": "react-scripts eject",
+    "db": "nodemon backend/server.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/App.js",
+      "!src/index.js",
+      "!src/pages/components/AddVet.js",
+      "!src/pages/components/LocateMarker.js",
+      "!src/pages/components/LocationMarker.js",
+      "!src/pages/components/SeeVetInfo.js",
+      "!src/pages/components/PassEqual.js",
+      "!src/pages/components/FilterForm.js",
+      "!src/pages/functions/FetchVets.js",
+      "!src/features/auth/authService.js",
+      "!src/features/auth/authSlice.js",
+      "!src/features/auth/authContext.js",
+      "!src/app/store.js",
+      "!src/app/store.js",
+      "!src/pages/functions/*.{js,jsx}"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)",
+      "node_modules/react-leaflet",
+      "!src/index.js"
+    ]
+  },
+  "devDependencies": {
+    "axios-mock-adapter": "^1.21.2",
+    "prettier": "^2.7.1",
+    "cypress": "^10.11.0"
+  }
 }
