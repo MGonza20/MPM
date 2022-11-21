@@ -8,7 +8,6 @@
   background-color: #7df179c8; 
   overflow-x: hidden;
   padding: 1%;
-  display: flex;
   align-items: center;
   height: 100%;
 }
@@ -24,8 +23,8 @@
     border-style: dashed;
     position: relative;
     left: 15%;
-    padding: 500px;
-    padding-bottom: 500px;
+    padding: 5%;
+    padding-bottom: 15%;
 }
 
 .info{
