@@ -26,6 +26,7 @@ const VetPopup = ({ vet, regretOriginal }) => {
     return (
         <div data-testid={'vet-popup-react'}>
             <div className="body-a">
+                <button className="emBtn" onClick={() => regretOriginal(false)}>REGRESAR</button><br></br>
                 <div className="vet-container">
                     <Avatar
                         size="2xl"
@@ -53,7 +54,7 @@ const VetPopup = ({ vet, regretOriginal }) => {
                         </h1>
                         <br />
                     </div>
-                    <button className="emBtn">Ir allí</button>
+                    <br></br><button className="emBtn">Ir allí</button>
                     
                 </div>
                 
