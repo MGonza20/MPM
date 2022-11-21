@@ -57,7 +57,9 @@ const VetPopup = ({ vet, regretOriginal }) => {
                     
                 </div>
                 
+                
             </div>
+            <button className="emBtn" onClick={() => regretOriginal(false)}>REGRESAR</button>
             
             <footer className="footer-section">
                 <div className="container">
