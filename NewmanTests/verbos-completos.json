@@ -1,0 +1,364 @@
+{
+	"info": {
+		"_postman_id": "545c86d6-b053-499f-8de5-e42e05212eb3",
+		"name": "My Pet & Mw",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20220053"
+	},
+	"item": [
+		{
+			"name": "Get verified vets",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json()\r",
+							"pm.test(\"Gettings vets data response is successfuly\", function () {\r",
+							"    pm.expect(response.success).to.eql(true)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if Vets data is not empty\", function () {\r",
+							"    pm.expect(pm.response.json().data.length).to.be.above(0);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "text",
+							"value": "Third Vet",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/vets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json()\r",
+							"\r",
+							"pm.test('Check if it returns an id', function() {\r",
+							"  pm.expect(response).to.have.property('_id');\r",
+							"});\r",
+							"\r",
+							"pm.test('Check if it returns name', function() {\r",
+							"  pm.expect(response).to.have.property('name');\r",
+							"});\r",
+							"\r",
+							"pm.test('Check if it returns email', function() {\r",
+							"  pm.expect(response).to.have.property('email');\r",
+							"});\r",
+							"\r",
+							"pm.test('Check if it returns an token', function() {\r",
+							"  pm.expect(response).to.have.property('token');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Checking if response returns user values when loggin in\", function () {\r",
+							"  let properties = ['_id', 'name', 'email', 'token'];\r",
+							"  const response = pm.response.json();\r",
+							"\r",
+							"  properties.forEach((prop) => {\r",
+							"    pm.expect(response).to.include(prop);\r",
+							"  });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "sara.paguaga@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create vet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json()\r",
+							"pm.test(\"Check if veterinary has created correctly\", function () {\r",
+							"    pm.expect(response.success).to.eql(true)\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Sara Tech Veterinary 12345\",\r\n    \"direction\": {\r\n        \"city\": \"ny\",\r\n        \"zone\": \"ny\",\r\n        \"address\": \"5th avenue\"\r\n    },\r\n    \"email\": \"try@gmail.com\",\r\n    \"services\": [\r\n        \"Rayos X\",\r\n        \"Vacunacion\",\r\n        \"Operacion\"\r\n    ],\r\n    \"long\": 57.6108,\r\n    \"lat\": 26.3928,\r\n    \"phone\": \"9999-9999\",\r\n    \"emergency\": false,\r\n    \"vet_type\": \"Normal\",\r\n    \"open_time\": \"08:00:00\",\r\n    \"close_time\": \"20:00:00\",\r\n    \"verified\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/vets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json()\r",
+							"\r",
+							"pm.test('Checking if response returns users id when loggin in', function() {\r",
+							"  pm.expect(response).to.have.property('_id');\r",
+							"});\r",
+							"\r",
+							"pm.test('Checking if response returns users when loggin in', function() {\r",
+							"  pm.expect(response).to.have.property('name');\r",
+							"});\r",
+							"\r",
+							"pm.test('Checking if response returns users email when loggin in', function() {\r",
+							"  pm.expect(response).to.have.property('email');\r",
+							"});\r",
+							"\r",
+							"pm.test('Checking if response returns users token when loggin in', function() {\r",
+							"  pm.expect(response).to.have.property('token');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.globals.set(\"userID\", response._id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "joshhhh",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "mm4@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json()\r",
+							"pm.test(\"Check if user name has beem updated\", function () {\r",
+							"    pm.expect(response.name).to.eql(\"test nzme\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "test nzme",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users/{{userID}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"{{userID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json()\r",
+							"pm.test(\"Check if user name has been deleted\", function () {\r",
+							"    pm.expect(response.messsge).to.eql(\"Usuario borrado\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/users/{{userID}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"{{userID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
