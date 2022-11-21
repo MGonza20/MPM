@@ -25,12 +25,6 @@ import { Divider } from '@chakra-ui/react'
 const VetPopup = ({ vet, regretOriginal }) => {
     return (
         <div data-testid={'vet-popup-react'}>
-            <button
-                data-testid="regretOriginal"
-                onClick={() => regretOriginal(false)}
-            >
-                REGRESAR
-            </button>
             <div className="body-a">
                 <div className="vet-container">
                     <Avatar
@@ -39,23 +33,33 @@ const VetPopup = ({ vet, regretOriginal }) => {
                         src="https://pbs.twimg.com/media/EWH0kEZWsAAWwvI.jpg"
                     />
                     <div className="info">
-                        <h1>{vet['name']}</h1>
+                        <h1><b>{vet['name']}</b></h1>
+                        <br />
                         <Divider orientation="horizontal" />
-                        <h1>Correo: {vet['email']}</h1>
+                        <br />
+                        <h1 ><b>Correo: {vet['email']}</b></h1>
+                        <br />
                         <Divider orientation="horizontal" />
-                        <h1>Número de telefono: {vet['phone']}</h1>
+                        <br />
+                        <h1><b>Número de telefono: {vet['phone']}</b></h1>
+                        <br />
                         <Divider orientation="horizontal" />
-                        <h1>
+                        <br />
+                        <h1><b>
                             Dirección: {vet['direction']['city']} -{' '}
                             {vet['direction']['zone']} -{' '}
                             {vet['direction']['address']}
+                            </b>
                         </h1>
+                        <br />
                     </div>
                     <button className="emBtn">Ir allí</button>
-                    <Skeleton height="20px" />
+                    
                 </div>
+                
             </div>
-            <footer className="footer-section" data-testid={'vet-footer'}>
+            
+            <footer className="footer-section">
                 <div className="container">
                     <div className="footer-cta pt-5 pb-5">
                         <div className="row">
@@ -108,6 +112,7 @@ const VetPopup = ({ vet, regretOriginal }) => {
                             <div className="col-xl-6 col-lg-6 text-center text-lg-left"></div>
                             <div className="col-xl-6 col-lg-6 d-none d-lg-block text-right">
                                 <div className="footer-menu">
+                                    <Skeleton height="20px" />
                                     <ul></ul>
                                 </div>
                             </div>
