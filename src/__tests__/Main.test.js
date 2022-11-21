@@ -8,10 +8,4 @@ describe('Main Component Testings', () => {
         const mainElement = screen.getByTestId('main-test')
         expect(mainElement).toBeInTheDocument()
     })
-
-    // test('Testing Text of Main', () => {
-    //     render(<Main />)
-    //     const mainTitle = screen.getByTestId('main-title')
-    //     expect(mainTitle).toHaveTextContent('My Pet & Me')
-    // })
 })

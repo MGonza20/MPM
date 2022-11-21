@@ -5,7 +5,7 @@
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #9e9e9ec8; 
+  background-color: #7df179c8; 
   overflow-x: hidden;
   padding: 1%;
   display: flex;
@@ -24,6 +24,8 @@
     border-style: dashed;
     position: relative;
     left: 15%;
+    padding: 500px;
+    padding-bottom: 500px;
 }
 
 .info{
@@ -42,14 +44,30 @@
     font-weight: bold;
     text-decoration: none;  
   }
+  
 
   ul {
     margin: 0px;
     padding: 0px;
 }
+
+.emBtn2{
+  margin: 0rem;
+  color: white;
+  border-radius: 3px;
+  text-transform: uppercase;
+  background-color: #ea9a64;
+  padding: 5px;
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;  
+}
 .footer-section {
   background: #151414;
   position: relative;
+  line-height: 50px;
+  padding: 0 20px;
+  clear: both;
 }
 .footer-cta {
   border-bottom: 1px solid #373636;

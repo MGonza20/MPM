@@ -1,0 +1,23 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - filtro-refresh 
+
+jobs:
+  deply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - name: Install dependencies 
+        run: npm install
+      - name: App build
+        run: npm start
+      - name: Run database
+        run: npm run db

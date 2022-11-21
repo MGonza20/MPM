@@ -5,10 +5,6 @@ import { Input, FormLabel, FormControl } from '@chakra-ui/react'
 import '../../styles/register.css'
 
 const InputComponent = ({ getter, title, message }) => {
-    const handleChange = (event) => {
-        getter(event.target.value)
-    }
-
     const colors = {
         fondo: 'rgb(223 225 225)',
         verde: 'rgb(174 213 142)',
@@ -24,10 +20,13 @@ const InputComponent = ({ getter, title, message }) => {
             <FormControl isRequired>
                 <FormLabel>{title}</FormLabel>
                 <Input
-                    onChange={handleChange}
+                    data-testid={'handleChange'}
+                    onChange={(event) => {
+                        getter(event.target.value)
+                    }}
                     focusBorderColor={colors.verde}
                     placeholder={message}
-                    isRequired = {true}
+                    isRequired={true}
                 />
             </FormControl>
         </div>

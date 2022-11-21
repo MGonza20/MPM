@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Button } from '@chakra-ui/react'
 
-function Pagination({ postsPerPage, totalPosts, paginate }) {
+const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     const pageNumbers = []
 
     for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
@@ -21,7 +21,7 @@ function Pagination({ postsPerPage, totalPosts, paginate }) {
     }
 
     return (
-        <nav>
+        <nav data-testid={'paginate-component'}>
             <ul style={styles.pagination}>
                 {pageNumbers.map((number) => (
                     <Button

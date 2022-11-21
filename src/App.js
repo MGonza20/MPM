@@ -10,10 +10,13 @@ import RegisterVet from './pages/RegisterVet'
 import FAQ from './pages/FAQ'
 import HeaderComponent from './pages/components/HeaderComponent'
 import MapVet from './pages/MapVet'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
     return (
-        <Routes>
+        <>
+        <Routes data-testid={'app-test'}>
             <Route
                 path="/"
                 element={
@@ -55,7 +58,7 @@ const App = () => {
                 element={
                     <>
                         {' '}
-                        <Register />{' '}
+                        <HeaderComponent /> <Register />{' '}
                     </>
                 }
             ></Route>
@@ -73,7 +76,7 @@ const App = () => {
                 element={
                     <>
                         {' '}
-                        <RegisterVet />{' '}
+                        <HeaderComponent /> <RegisterVet />{' '}
                     </>
                 }
             ></Route>
@@ -87,6 +90,8 @@ const App = () => {
                 }
             ></Route>
         </Routes>
+        <ToastContainer />
+        </>
     )
 }
 

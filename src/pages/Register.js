@@ -1,113 +1,133 @@
-import React, { useState } from 'react'
-import InputComponent from './components/InputComponent'
+import { useState, useEffect } from 'react'
 import { Heading, Button } from '@chakra-ui/react'
 import '../styles/register.css'
-
-let user_type = 'vet'
+import { Input, FormLabel } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { register, reset } from '../features/auth/authSlice'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
 
 const Register = () => {
-    // const [nombre, setNombre] = useState('')
-    // const [apellido, setApellido] = useState('')
-    const [user, setUser] = useState('')
-    const [correo, setCorreo] = useState('')
-    const [contra1, setContra1] = useState('')
-    const [contra2, setContra2] = useState('')
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        password2: '',
+    })
 
-    const handleAddUser = (user_name, email, password, type_user) => {
-        fetch('http://127.0.0.1:5000/add_user', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                user_name: user_name,
-                correo: email,
-                password: password,
-                type_user: type_user,
-            }),
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                if (result.success) {
-                    alert('Se agrego el user')
-                } else {
-                    alert('Error con la solicitud')
-                }
-            })
-            .catch((error) => {
-                alert('Ocurrio un error inesperado: ' + error)
-            })
+    const { name, email, password, password2 } = formData
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
+
+    const { user, isError, isSuccess, message } = useAppSelector(
+        (state) => state.auth
+    )
+
+    useEffect(() => {
+        if (isError) {
+            toast.error(message)
+        }
+
+        if (isSuccess || user) {
+            navigate('/RegisterVet')
+        }
+
+        dispatch(reset())
+    }, [user, isError, isSuccess, message, navigate, dispatch])
+
+    const handleChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }))
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        if (contra1 === contra2) {
-            handleAddUser(user, correo, contra1, user_type)
+    const onSubmit = (e) => {
+        e.preventDefault()
+
+        if (password !== password2) {
+            toast.error('Las contraseñas no son iguales')
         } else {
-            alert('no coinciden las contraseñas, vuelva a intentarlo')
+            const userData = {
+                name,
+                email,
+                password,
+            }
+            dispatch(register(userData))
         }
     }
 
-    // const getNombre = (name) => {
-    //     setNombre(name)
-    // }
-
-    // const getApellido = (apellido) => {
-    //     setApellido(apellido)
-    // }
-    const getUser = (user) => {
-        setUser(user)
-    }
-    const getCorreo = (correo) => {
-        setCorreo(correo)
-    }
-    const getContra = (contra) => {
-        setContra1(contra)
-    }
-    const getContras = (contras) => {
-        setContra2(contras)
+    const colors = {
+        verde: 'rgb(174 213 142)',
+        blanco: 'rgb(255, 255, 255)',
     }
 
     return (
         <div data-testid={'register-page-test'}>
             <div className="provisionalBackgorund">
-                <div className="faqCont container">
+                <div className="outerContainer container">
                     <div className="infoContainer">
                         <div className="titleContainer">
-                            <Heading className="title">Registro</Heading>
+                            <Heading className="title">Cree una cuenta</Heading>
                         </div>
-                        <form onSubmit={handleSubmit}>
-                            <InputComponent
-                                // getter={getNombre}
-                                title="Nombre"
-                                message="Ingresa tu nombre"
-                            />
-                            <InputComponent
-                                // getter={getApellido}
-                                title="Apellidos"
-                                message="Ingresa tus apellidos"
-                            />
-                            <InputComponent
-                                getter={getUser}
-                                title="Nombre de usuario"
-                                message="Ingresa tu nombre de usuario"
-                            />
-                            <InputComponent
-                                getter={getCorreo}
-                                title="Correo"
-                                message="Ingresa tu correo"
-                            />
-                            <InputComponent
-                                getter={getContra}
-                                title="Contraseña"
-                                message="Ingresa tu contraseña"
-                            />
-                            <InputComponent
-                                getter={getContras}
-                                title="Cofirmar contraseña"
-                                message="Confirma tu contraseña"
-                            />
+
+                        <form onSubmit={onSubmit} data-testid={'onSubmit'}>
+                            <div className="outerContainer2">
+                                <FormLabel>{'Nombre'}</FormLabel>
+                                <Input
+                                    data-testid={'name-input-test'}
+                                    type="text"
+                                    value={name}
+                                    name="name"
+                                    onChange={handleChange}
+                                    focusBorderColor={colors.verde}
+                                    placeholder={'Ingrese su nombre'}
+                                />
+                            </div>
+
+                            <div className="outerContainer2">
+                                <FormLabel>{'Correo'}</FormLabel>
+                                <Input
+                                    data-testid={'email-input-test'}
+                                    type="text"
+                                    value={email}
+                                    name="email"
+                                    onChange={handleChange}
+                                    focusBorderColor={colors.verde}
+                                    placeholder={'Ingrese su correo'}
+                                />
+                            </div>
+
+                            <div className="outerContainer2">
+                                <FormLabel>{'Contraseña'}</FormLabel>
+                                <Input
+                                    data-testid={'password-input-test'}
+                                    type="text"
+                                    value={password}
+                                    name="password"
+                                    onChange={handleChange}
+                                    focusBorderColor={colors.verde}
+                                    placeholder={'Ingrese su contraseña'}
+                                />
+                            </div>
+
+                            <div className="outerContainer2">
+                                <FormLabel>{'Confirmar contraseña'}</FormLabel>
+                                <Input
+                                    data-testid={'password-veri-input-test'}
+                                    type="text"
+                                    value={password2}
+                                    name="password2"
+                                    onChange={handleChange}
+                                    focusBorderColor={colors.verde}
+                                    placeholder={
+                                        'Ingrese nuevamente su contraseña'
+                                    }
+                                />
+                            </div>
+
                             <Button
+                                data-testid="button-accept-test"
                                 backgroundColor="#ea9a64"
                                 _hover="rgb(174 213 142)"
                                 _active={{
@@ -122,16 +142,13 @@ const Register = () => {
                                 Aceptar
                             </Button>
                         </form>
-
                         <p className="questionCont">
-                            ¿Ya tienes cuenta?{' '}
+                            ¿Tiene cuenta?{' '}
                             <a href="./Login">
-                                {' '}
-                                <b className="highlight">Iniciar sesión</b>
+                                <b className="highlight">¡Inicie Sesión!</b>
                             </a>
                         </p>
                     </div>
-
                     <div className="innerContainer"></div>
                 </div>
             </div>
